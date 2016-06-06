@@ -1,5 +1,10 @@
 #start_page {
 	display: block;
+	text-align:center;
+}
+
+#start_page p {
+	text-size: 200%;
 }
 
 #game_page {
