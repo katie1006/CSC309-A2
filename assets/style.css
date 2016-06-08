@@ -1,5 +1,4 @@
 #start_page {
-	display: block;
 	text-align:center;
 }
 
@@ -8,5 +7,12 @@
 }
 
 #game_page {
+}
+
+.hide {
 	display: none;
+}
+
+.show {
+	display: block;
 }
