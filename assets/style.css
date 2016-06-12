@@ -16,3 +16,12 @@
 .show {
 	display: block;
 }
+
+#info_bar {
+	height: 40px;
+	width: 1000px;
+}
+
+#info_bar > * {
+	display: inline-block;
+}
