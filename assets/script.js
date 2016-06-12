@@ -17,8 +17,8 @@ function switchScene() {
 		console.log('game finished');
 		
 		// TODO: update scene back to the start page
-		document.getElementById('page_title').innerHTML = 'Solar Game';
-		document.getElementById('page_button').innerHTML = 'START';
+		$('#page_title').html('Solar Game');
+		$('#page_button').html('START');
 		// insert top scores
 		
 		currentState = 0;
@@ -31,13 +31,13 @@ function switchScene() {
 		
 		if (currentState == 2) {
 			// switched to level 1 summary page
-			document.getElementById('page_title').innerHTML = ('Level# 1');
-			document.getElementById('page_button').innerHTML = 'NEXT';
+			$('#page_title').html('Level# 1');
+			$('#page_button').html('NEXT');
 			
 		} else if (currentState == 4) {
 			// switched to level 2 summary page
-			document.getElementById('page_title').innerHTML = ('Level# 2');
-			document.getElementById('page_button').innerHTML = 'FINISH';
+			$('#page_title').html('Level# 2');
+			$('#page_button').html('FINISH');
 			
 		} else { // 1 or 3
 			// switched to game page
