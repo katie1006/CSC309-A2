@@ -8,20 +8,20 @@
 	</head>
 	
 	<body>
-		<section id="start_page" class='show'>
-			<p id="start_page_title">Title</p>
+		<section id="transition_page" class='show'>
+			<p id="page_title">Solar Game</p>
 			<section id="score_holder">
 				<p>High Score:</p>
 				<p>0</p>
 			</section>
-			<button id="start_button" onclick='switchScene()'>START</button>
+			<button id="page_button" onclick='switchScene()'>START</button>
 		</section>
 		
 		<section id="game_page" class='hide'>
 			<section id="info_bar">
 				<p id="level">Level# 1</p>
 				<p id="score">Score: 200</p>
-				<button>Pause</button>
+				<button onclick='switchScene()'>Pause</button>
 				<p>51 seconds</p>
 			</section>
 			

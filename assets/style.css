@@ -1,12 +1,32 @@
 /* by ID */
-#start_page {
+/* Start Page */
+#transition_page {
 	text-align:center;
 }
 
-#start_page p {
-	text-size: 200%;
+#transition_page > * {
+	border: 1px dashed black;
+	display: inline-block;
+	margin: 10px 30%;
+	min-width: 100px;
+	padding: 10px 40px;
 }
 
+#page_title {
+	font-weight: bold;
+	font-size: 250%;
+	color: #EEFF00;
+	background-color: #1F00BE;
+	border-color: #EEFF00;
+	padding: 20px 80px;
+}
+
+#page_button {
+	border-style: solid;
+	background-color: white;
+}
+
+/* Game Page */
 #game_page {
 	text-align: center;
 }
