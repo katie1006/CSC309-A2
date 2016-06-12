@@ -1,4 +1,7 @@
+// global variables
 var currentState = 0;
+var timerMethod;
+var timerCount = 60;
 $(document).ready(function() {
 	if (typeof(Storage) !== "undefined") {
 		/* use this variable currentState to control what scene to show
@@ -41,7 +44,21 @@ function switchScene() {
 			
 		} else { // 1 or 3
 			// switched to game page
-			
+			var level = (currentState+1)/2;
+			$('#level').html('Level# '+level);
+			timerMethod = setInterval(clock, 1000);
 		}
+	}
+function clock() {
+	timerCount--;
+	if (timerCount == 0) {
+		clearInterval(timerMethod);
+		// reset timer
+		timerCount = 60;
+		$('#timer').html('60 seconds');
+		
+		switchScene();
+	} else {
+		$('#timer').html(timerCount+' seconds');
 	}
 }
