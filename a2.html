@@ -18,10 +18,14 @@
 		</section>
 		
 		<section id="game_page" class='hide'>
+			<section id="overlay" class='hide'>
+				<p>Pause</p>
+			</section>
+			
 			<section id="info_bar">
 				<p id="level">Level# 1</p>
 				<p id="score">Score: 200</p>
-				<button onclick='switchScene()'>Pause</button>
+				<button id='pause_button' onclick='pause()'>Pause</button>
 				<p id='timer'>60 seconds</p>
 			</section>
 			

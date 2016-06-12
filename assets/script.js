@@ -2,6 +2,8 @@
 var currentState = 0;
 var timerMethod;
 var timerCount = 60;
+var paused = false;
+
 $(document).ready(function() {
 	if (typeof(Storage) !== "undefined") {
 		/* use this variable currentState to control what scene to show
@@ -13,6 +15,11 @@ $(document).ready(function() {
 		*/
 		currentState = 0;
 	}
+	
+	$(window).resize(function() {
+		var rect = document.getElementById('view_port').getBoundingClientRect();
+		$('#overlay').css('left', (rect.left-6.5)+"px");
+	});
 });
 
 function switchScene() {
@@ -49,6 +56,25 @@ function switchScene() {
 			timerMethod = setInterval(clock, 1000);
 		}
 	}
+}
+
+function pause() {
+	if (paused) {
+		$('#overlay').toggleClass('hide show');
+		timerMethod = setInterval(clock, 1000);
+		
+		$('#pause_button').html('Pause');
+		paused = false;
+	} else  {
+		var rect = document.getElementById('view_port').getBoundingClientRect();
+		$('#overlay').toggleClass('hide show').css('left', (rect.left-6.5)+"px");
+		clearInterval(timerMethod);
+		
+		$('#pause_button').html('Resume');
+		paused = true;
+	}
+}
+
 function clock() {
 	timerCount--;
 	if (timerCount == 0) {
