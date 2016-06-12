@@ -1,3 +1,4 @@
+/* by ID */
 #start_page {
 	text-align:center;
 }
@@ -7,21 +8,46 @@
 }
 
 #game_page {
+	text-align: center;
 }
 
+#info_bar {
+	height: 40px;
+	width: 1000px;
+	background-color: #CCFEA2;
+	display: -webkit-inline-flex;
+	border: 1px solid black;
+}
+
+#info_bar > * {
+	/* let flexbox adjust the margin */
+	margin: auto;
+	font-weight: bold;
+}
+
+#view_port {
+	background-color: #7BADFF;
+	height: 640px;
+	width: 1000px;
+	display: inline-block;
+	border: 1px solid black;
+}
+
+#score {
+	width: 60%;
+	font-size: 130%;
+}
+
+#level {
+	width: 6%;
+	margin-right: 10%;
+}
+
+/* by class */
 .hide {
 	display: none;
 }
 
 .show {
 	display: block;
-}
-
-#info_bar {
-	height: 40px;
-	width: 1000px;
-}
-
-#info_bar > * {
-	display: inline-block;
 }
