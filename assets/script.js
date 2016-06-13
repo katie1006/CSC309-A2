@@ -3,6 +3,7 @@ var currentState = 0;
 var timerMethod;
 var timerCount = 60;
 var paused = false;
+var currentScore = 200;
 
 // Black hole constants
 var type_blue_hole = 0;
@@ -97,6 +98,7 @@ function switchScene() {
 			// switched to game page
 			var level = (currentState+1)/2;
 			$('#level').html('Level# '+level);
+			$('#score').html('Score: '+currentScore);
 			timerMethod = setInterval(clock, 1000);
 			
 			$('#view_port').click(onCanvasClicked);
