@@ -4,6 +4,49 @@ var timerMethod;
 var timerCount = 60;
 var paused = false;
 
+// Black hole constants
+var type_blue_hole = 0;
+var type_purple_hole = 1;
+var type_black_hole = 2;
+var pull_speed = 20;
+var path_blue_hole = "assets/images/blue_hole.svg";
+var path_purple_hole = "assets/images/purple_hole.svg";
+var path_black_hole = "assets/images/black_hole.svg";
+
+// Constructor for black holes
+var blackHoles = new Array();
+var BlackHole = function(type) {
+	if (type == type_blue_hole) {
+		this.speed = 0.5;
+		this.full = 3;
+		this.point = 5;
+	} else if (type == type_purple_hole) { 
+		this.speed = 1;
+		this.full = 2;
+		this.point = 10;
+	} else if (type == type_black_hole) { 
+		this.speed = 2;
+		this.full = 1;
+		this.point = 20;
+	} else {
+		// otherwise, hmm.... something must be wrong
+		console.log('Things went wrong! This kind of black hole does not exist!');
+	}
+}
+BlackHole.prototype.onclick = function() {
+	console.log("I'm clicked!");
+	// dismiss this object
+	
+	// increase the score
+}
+var blackHoleMethod;
+
+window.onload = function() {
+	console.log('onload');
+	var canvas = document.getElementById('view_port');
+	window.ctx = canvas.getContext("2d");
+};
+
 $(document).ready(function() {
 	if (typeof(Storage) !== "undefined") {
 		/* use this variable currentState to control what scene to show
@@ -38,6 +81,7 @@ function switchScene() {
 		$('#transition_page').toggleClass('hide show');
 		$('#game_page').toggleClass('hide show');
 		currentState++;
+		clearInterval(blackHoleMethod);
 		
 		if (currentState == 2) {
 			// switched to level 1 summary page
@@ -54,21 +98,28 @@ function switchScene() {
 			var level = (currentState+1)/2;
 			$('#level').html('Level# '+level);
 			timerMethod = setInterval(clock, 1000);
+			
+			$('#view_port').click(onCanvasClicked);
+			
+			// draw the game objects
+			drawGame();
 		}
 	}
 }
 
 function pause() {
-	if (paused) {
+	if (paused) { // resume game
 		$('#overlay').toggleClass('hide show');
 		timerMethod = setInterval(clock, 1000);
+		blackHoleMethod = setInterval(createBlackHole, 1000);
 		
 		$('#pause_button').html('Pause');
 		paused = false;
-	} else  {
+	} else  { // pause game
 		var rect = document.getElementById('view_port').getBoundingClientRect();
 		$('#overlay').toggleClass('hide show').css('left', (rect.left-6.5)+"px");
 		clearInterval(timerMethod);
+		clearInterval(blackHoleMethod);
 		
 		$('#pause_button').html('Resume');
 		paused = true;
@@ -87,4 +138,36 @@ function clock() {
 	} else {
 		$('#timer').html(timerCount+' seconds');
 	}
+}
+
+function drawGame() {
+	blackHoleMethod = setInterval(createBlackHole, 3000);
+	
+}
+
+function createBlackHole() {
+	var rand = Math.random();
+	var img = new Image();
+	img.onload = function() {
+		window.ctx.drawImage(img, Math.random()*1000, Math.random()*640);
+	}
+	var newBlackHole;
+	if (rand > 0.5) { // blue, most frequent
+		img.src = path_blue_hole;
+		newBlackHole = new BlackHole(0);
+	} else if (rand > 0.15) { // purple, infrequent
+		img.src = path_purple_hole;
+		newBlackHole = new BlackHole(1);
+	} else { // black, rare
+		img.src = path_black_hole;
+		newBlackHole = new BlackHole(2);
+	}
+	img.onclick = function() {
+		console.log("clicked!");
+	}
+	blackHoles.push(newBlackHole);
+}
+
+function onCanvasClicked(event) {
+	console.log("canvas click");
 }
