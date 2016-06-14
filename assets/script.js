@@ -140,7 +140,7 @@ window.onload = function(){
 
 	draw1(ctx,object1.x,object1.y);//the cresent moon
 	draw2(ctx,object2.x,object2.y);  //the rocket
-	draw3(ctx,object2.x,object3.y); // the UFO
+	draw3(ctx,object3.x,object3.y); // the UFO
 	draw4(ctx,object4.x,object4.y);//the astronaut
 	draw5(ctx,object5.x,object5.y); // the saturn
 	draw6(ctx,object6.x,object6.y); //the surveillance aircraft
@@ -526,6 +526,7 @@ function draw5(ctx,x,y){  //saturn
 
 function animate(ctx,array){
 
+	ctx.beginPath();
 	ctx.clearRect(0,0,1000,640);
  	
  	var i = 0;
@@ -554,7 +555,7 @@ function animate(ctx,array){
 
  	draw1(ctx,object1.x,object1.y);//the cresent moon
 	draw2(ctx,object2.x,object2.y);  //the rocket
-	draw3(ctx,object2.x,object3.y); // the UFO
+	draw3(ctx,object3.x,object3.y); // the UFO
 	draw4(ctx,object4.x,object4.y);//the astronaut
 	draw5(ctx,object5.x,object5.y); // the saturn
 	draw6(ctx,object6.x,object6.y); //the surveillance aircraft
