@@ -125,6 +125,9 @@ var object10 = { //star
 	yspeed:Math.random() * 100
 }
 
+//array of 10 objects
+var tenobjects = [object1,object2,object3,object4,object5,object6,object7,object8,object9,object10];
+
 window.onload = function(){
     
     var c = document.getElementById("view_port");
@@ -147,8 +150,7 @@ window.onload = function(){
 	draw8(ctx,object8.x,object8.y);//the garbage
 	draw9(ctx,object9.x,object9.y);  //a really colorful planet
 	draw10(ctx,object10.x,object10.y);  // a star
-
-	// setTimeout(animate1(ctx,object1),33);
+	
  
 }
 	
@@ -521,62 +523,49 @@ function draw5(ctx,x,y){  //saturn
 	ctx.fill();
  }
 
-function animate1(ctx,object){
+function animate(ctx,array){
 
-	ctx.clearRect(object.x - 25, object.y - 25, 50,50);
+	ctx.clearRect(0,0,1000,640);
  	
- 	if(object.x > 974){
- 		object.xspeed = -object.xspeed;
- 		object.x += object.xspeed;
- 	}else if(object.x < 26){
- 		object.xspeed = -object.xspeed;
- 		object.x += object.xspeed;
- 	}else{
- 		object.x += object.xspeed;
+ 	var i = 0;
+
+ 	for(; i < 10; i++){
+ 		if(array[i].x > 974){
+ 			array[i].x += array[i].xspeed;
+ 			array[i].xspeed = -array[i].xspeed;
+		}else if(array[i].x < 26){
+			array[i].x += array[i].xspeed;
+ 			array[i].xspeed = -array[i].xspeed;
+		}else{
+			array[i].x += array[i].xspeed;
+		}
+
+		if(array[i].y > 614){
+			array[i].y += array[i].yspeed;
+			array[i].yspeed = -array[i].yspeed;
+		}else if(array[i].y < 26){
+			array[i].y += array[i].yspeed;
+			array[i].yspeed = -array[i].yspeed;
+		}else{
+			array[i].y += array[i].yspeed;
+		}
  	}
 
- 	if(object.y > 614){
- 		object.yspeed = -object.yspeed;
- 		object.y += object.yspeed;
- 	}else if(object.y < 26){
- 		object.yspeed = -object.yspeed;
- 		object.y += object.yspeed;
- 	}else{
- 		object.y += object.yspeed;
- 	}
+ 	draw1(ctx,object1.x,object1.y);//the cresent moon
+	draw2(ctx,object2.x,object2.y);  //the rocket
+	draw3(ctx,object2.x,object3.y); // the UFO
+	draw4(ctx,object4.x,object4.y);//the astronaut
+	draw5(ctx,object5.x,object5.y); // the saturn
+	draw6(ctx,object6.x,object6.y); //the surveillance aircraft
+	draw7(ctx,object7.x,object7.y);//the unknown planet
+	draw8(ctx,object8.x,object8.y);//the garbage
+	draw9(ctx,object9.x,object9.y);  //a really colorful planet
+	draw10(ctx,object10.x,object10.y);  // a star
 
- 	draw1(ctx,object.x,object.y);
-
+	setTimeout(animate(ctx,array),33);
  }
 
 
- function animate2(ctx,object){
-
- }
- function animate3(ctx,object){
- 	
- }
- function animate4(ctx,object){
- 	
- }
- function animate5(ctx,object){
- 	
- }
- function animate6(ctx,object){
- 	
- }
- function animate7(ctx,object){
- 	
- }
- function animate8(ctx,object){
- 	
- }
- function animate9(ctx,object){
- 	
- }
- function animate10(ctx,object){
- 	
- }
 
 
 //----------------------------------------分割线---------------------------------------------------
