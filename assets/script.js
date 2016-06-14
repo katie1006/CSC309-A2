@@ -54,71 +54,71 @@ window.onload = function() {
 var object1 = {     //moon
 	x:Math.random() * 950 + 25,
 	y:Math.random() * 590 + 25,
-	xspeed: Math.random() * 100,
-	yspeed:Math.random() * 100
+	xspeed: Math.random() * 4,
+	yspeed:Math.random() * 4
 }
 
 var object2 = {   //rocket
 	x:Math.random() * 950 + 25,
 	y:Math.random() * 590 + 40,
-	xspeed:Math.random() * 100,
-	yspeed:Math.random() * 100
+	xspeed:Math.random() * 4,
+	yspeed:Math.random() * 4
 }
 
 var object3 = { //UFO
 	x:Math.random() * 950,
 	y:Math.random() * 590 + 40,
-	xspeed:Math.random() * 100,
-	yspeed:Math.random() * 100
+	xspeed:Math.random() * 4,
+	yspeed:Math.random() * 4
 }
 
 var object4 = { //the astronaut
 	x:Math.random() * 950 + 25,
 	y:Math.random() * 590 + 20,
-	xspeed:Math.random() * 100,
-	yspeed:Math.random() * 100
+	xspeed:Math.random() * 4,
+	yspeed:Math.random() * 4
 }
 
 var object5 = { //saturn 
 	x:Math.random() * 950 + 25,
 	y:Math.random() * 590 + 25,
-	xspeed:Math.random() * 100,
-	yspeed:Math.random() * 100
+	xspeed:Math.random() * 4,
+	yspeed:Math.random() * 4
 }
 
 var object6 = { //surveillance aircraft
 	x:Math.random() * 950 + 25,
 	y:Math.random() * 590 + 25,
-	xspeed:Math.random() * 100,
-	yspeed:Math.random() * 100
+	xspeed:Math.random() * 4,
+	yspeed:Math.random() * 4
 }
 
 var object7 = { // unknown planet
 	x:Math.random() * 950 + 25,
 	y:Math.random() * 590 + 25,
-	xspeed: Math.random() * 100,
-	yspeed:Math.random() * 100
+	xspeed: Math.random() * 4,
+	yspeed:Math.random() * 4
 }
 
 var object8 = { //space garbage
 	x:Math.random() * 950 + 25,
 	y:Math.random() * 590 + 25,
-	xspeed:Math.random() * 100,
-	yspeed:Math.random() * 100
+	xspeed:Math.random() * 4,
+	yspeed:Math.random() * 4
 }
 
 var object9 = {  //a really colorful planet
 	x:Math.random() * 950 + 25,
 	y:Math.random() * 590 + 25,
-	xspeed:Math.random() * 100,
-	yspeed: Math.random() * 100
+	xspeed:Math.random() * 4,
+	yspeed: Math.random() * 4
 }
 
 var object10 = { //star 
 	x:Math.random() * 950 + 25,
 	y:Math.random() * 590 + 25,
-	xspeed:Math.random() * 100,
-	yspeed:Math.random() * 100
+	xspeed:Math.random() * 4,
+	yspeed:Math.random() * 4
 }
 
 //array of 10 objects
@@ -133,8 +133,6 @@ window.onload = function(){
 	//975-25 = 950  ,    615-25 = 590;
 	//but for the UFO, maximum of x-coordinate is 950 and minimum is 0
 	// the interface is 1000 width and 640 height 
-	
-
 
 	draw1(ctx,object1.x,object1.y);//the cresent moon
 	draw2(ctx,object2.x,object2.y);  //the rocket
@@ -146,6 +144,9 @@ window.onload = function(){
 	draw8(ctx,object8.x,object8.y);//the garbage
 	draw9(ctx,object9.x,object9.y);  //a really colorful planet
 	draw10(ctx,object10.x,object10.y);  // a star
+
+
+	//animate(ctx,tenobjects);
 	
  
 }
