@@ -55,13 +55,13 @@ var object1 = {     //moon
 	x:Math.random() * 950 + 25,
 	y:Math.random() * 590 + 25,
 	xspeed: Math.random() * 4,
-	yspeed:Math.random() * 4
+	yspeed:Math.random() * (-4)
 }
 
 var object2 = {   //rocket
 	x:Math.random() * 950 + 25,
 	y:Math.random() * 590 + 40,
-	xspeed:Math.random() * 4,
+	xspeed:Math.random() * (-4),
 	yspeed:Math.random() * 4
 }
 
@@ -75,14 +75,14 @@ var object3 = { //UFO
 var object4 = { //the astronaut
 	x:Math.random() * 950 + 25,
 	y:Math.random() * 590 + 20,
-	xspeed:Math.random() * 4,
-	yspeed:Math.random() * 4
+	xspeed:Math.random() * (-4),
+	yspeed:Math.random() * (-4)
 }
 
 var object5 = { //saturn 
 	x:Math.random() * 950 + 25,
 	y:Math.random() * 590 + 25,
-	xspeed:Math.random() * 4,
+	xspeed:Math.random() * (-4),
 	yspeed:Math.random() * 4
 }
 
@@ -103,7 +103,7 @@ var object7 = { // unknown planet
 var object8 = { //space garbage
 	x:Math.random() * 950 + 25,
 	y:Math.random() * 590 + 25,
-	xspeed:Math.random() * 4,
+	xspeed:Math.random() * (-4),
 	yspeed:Math.random() * 4
 }
 
@@ -111,13 +111,13 @@ var object9 = {  //a really colorful planet
 	x:Math.random() * 950 + 25,
 	y:Math.random() * 590 + 25,
 	xspeed:Math.random() * 4,
-	yspeed: Math.random() * 4
+	yspeed: Math.random() * (-4)
 }
 
 var object10 = { //star 
 	x:Math.random() * 950 + 25,
 	y:Math.random() * 590 + 25,
-	xspeed:Math.random() * 4,
+	xspeed:Math.random() * (-4),
 	yspeed:Math.random() * 4
 }
 
