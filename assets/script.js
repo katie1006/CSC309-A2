@@ -153,7 +153,7 @@ window.onload = function(){
 }
 	
 
-function draw1(ctx, x,y){  /*draw the first object */
+function draw1(ctx, x,y){   //moon
  	
  
 
@@ -175,7 +175,7 @@ function draw1(ctx, x,y){  /*draw the first object */
 
  }
 
- function draw2(ctx,x,y){   /*draw the second object */
+ function draw2(ctx,x,y){   //rocket 
  	ctx.beginPath();
 	ctx.moveTo(x,y);
 	ctx.quadraticCurveTo(x+25,y,x, y-40);
@@ -214,7 +214,7 @@ function draw1(ctx, x,y){  /*draw the first object */
 	ctx.fill();
  }
 
- function draw3(ctx,x,y){  /*draw the third object */
+ function draw3(ctx,x,y){   //UFO 
  	ctx.beginPath();
 	ctx.moveTo(x, y);
 	ctx.bezierCurveTo(x, y-40, x+50, y-40, x+50, y);
@@ -239,7 +239,7 @@ function draw1(ctx, x,y){  /*draw the first object */
 	ctx.fill();
  }
 
- function draw4(ctx,x,y){ /* draw the fourth object */
+ function draw4(ctx,x,y){ //astronaut
  	ctx.beginPath();
 	ctx.moveTo(x,y);
 	ctx.arc(x,y,17.5,0,Math.PI*2,true);
@@ -301,7 +301,7 @@ function draw1(ctx, x,y){  /*draw the first object */
 
  }
 
-function draw5(ctx,x,y){ /* draw the fourth object */
+function draw5(ctx,x,y){  //saturn 
 	ctx.beginPath();
 	ctx.arc(x,y,25,0,Math.PI*2,true);
 	ctx.fillStyle = "#996600";
@@ -334,7 +334,7 @@ function draw5(ctx,x,y){ /* draw the fourth object */
 
  }
 
- function draw6(ctx,x,y){ /* draw the fourth object */
+ function draw6(ctx,x,y){   //surveillance aircraft
  	ctx.beginPath();
 	ctx.moveTo(x-25,y-20);
 	ctx.lineTo(x-20,y-25);
@@ -361,7 +361,7 @@ function draw5(ctx,x,y){ /* draw the fourth object */
 
  }
 
- function draw7(ctx,x,y){ /* draw the fourth object */
+ function draw7(ctx,x,y){   //unknown planet 
  	var anothergrd = ctx.createRadialGradient(x,y,1,x,y,30);
 	anothergrd.addColorStop(0,"red");
 	anothergrd.addColorStop(1,"white");
@@ -400,7 +400,7 @@ function draw5(ctx,x,y){ /* draw the fourth object */
 	ctx.stroke();
  }
 
- function draw8(ctx,x,y){      /* draw the fourth object */
+ function draw8(ctx,x,y){       //space garbage
  	ctx.beginPath();
 	ctx.arc(x,y,25,0,Math.PI*2,true);
 	ctx.lineWidth = 1;
@@ -430,7 +430,7 @@ function draw5(ctx,x,y){ /* draw the fourth object */
 
  }
 
- function draw9(ctx,x,y){ /* draw the fourth object */
+ function draw9(ctx,x,y){   //a colorful planet
  	var grd=ctx.createLinearGradient(x-25,y-25,x+25,y+25);
 	grd.addColorStop(0,"black");
 	grd.addColorStop("0.2","#cc3300");
@@ -448,7 +448,7 @@ function draw5(ctx,x,y){ /* draw the fourth object */
 	ctx.fill();
  }
 
- function draw10(ctx,x,y){ /* draw the fourth object */
+ function draw10(ctx,x,y){   //a star surrounded by four little stars
  	ctx.beginPath();
 	ctx.moveTo(x,y-25);
 	ctx.lineTo(x-10,y-10);
