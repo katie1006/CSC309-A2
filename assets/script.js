@@ -52,6 +52,535 @@ window.onload = function() {
 	window.ctx = canvas.getContext("2d");
 };
 
+
+//declaring and randomly initializing 10 objects
+//while animating,remember to update the coordicate of every objects(deletable)
+var object1 = {     //moon
+	x:Math.random() * 950 + 25,
+	y:Math.random() * 590 + 25,
+	xspeed: Math.random() * 100,
+	yspeed:Math.random() * 100
+}
+
+var object2 = {   //rocket
+	x:Math.random() * 950 + 25,
+	y:Math.random() * 590 + 40,
+	xspeed:Math.random() * 100,
+	yspeed:Math.random() * 100
+}
+
+var object3 = { //UFO
+	x:Math.random() * 950,
+	y:Math.random() * 590 + 40,
+	xspeed:Math.random() * 100,
+	yspeed:Math.random() * 100
+}
+
+var object4 = { //the astronaut
+	x:Math.random() * 950 + 25,
+	y:Math.random() * 590 + 20,
+	xspeed:Math.random() * 100,
+	yspeed:Math.random() * 100
+}
+
+var object5 = { //saturn 
+	x:Math.random() * 950 + 25,
+	y:Math.random() * 590 + 25,
+	xspeed:Math.random() * 100,
+	yspeed:Math.random() * 100
+}
+
+var object6 = { //surveillance aircraft
+	x:Math.random() * 950 + 25,
+	y:Math.random() * 590 + 25,
+	xspeed:Math.random() * 100,
+	yspeed:Math.random() * 100
+}
+
+var object7 = { // unknown planet
+	x:Math.random() * 950 + 25,
+	y:Math.random() * 590 + 25,
+	xspeed: Math.random() * 100,
+	yspeed:Math.random() * 100
+}
+
+var object8 = { //space garbage
+	x:Math.random() * 950 + 25,
+	y:Math.random() * 590 + 25,
+	xspeed:Math.random() * 100,
+	yspeed:Math.random() * 100
+}
+
+var object9 = {  //a really colorful planet
+	x:Math.random() * 950 + 25,
+	y:Math.random() * 590 + 25,
+	xspeed:Math.random() * 100,
+	yspeed: Math.random() * 100
+}
+
+var object10 = { //star 
+	x:Math.random() * 950 + 25,
+	y:Math.random() * 590 + 25,
+	xspeed:Math.random() * 100,
+	yspeed:Math.random() * 100
+}
+
+window.onload = function(){
+    
+    var c = document.getElementById("view_port");
+	var ctx = c.getContext("2d");
+	//usually maximum of x-coordinate is 975 and minimum is 25
+	//usually maximum of y-coordinate is 615 and minimum is 25
+	//975-25 = 950  ,    615-25 = 590;
+	//but for the UFO, maximum of x-coordinate is 950 and minimum is 0
+	// the interface is 1000 width and 640 height 
+	
+
+
+	draw1(ctx,object1.x,object1.y);//the cresent moon
+	draw2(ctx,object2.x,object2.y);  //the rocket
+	draw3(ctx,object2.x,object3.y); // the UFO
+	draw4(ctx,object4.x,object4.y);//the astronaut
+	draw5(ctx,object5.x,object5.y); // the saturn
+	draw6(ctx,object6.x,object6.y); //the surveillance aircraft
+	draw7(ctx,object7.x,object7.y);//the unknown planet
+	draw8(ctx,object8.x,object8.y);//the garbage
+	draw9(ctx,object9.x,object9.y);  //a really colorful planet
+	draw10(ctx,object10.x,object10.y);  // a star
+
+	// setTimeout(animate1(ctx,object1),33);
+ 
+}
+	
+
+function draw1(ctx, x,y){  /*draw the first object */
+ 	
+ 
+
+ 	ctx.beginPath();
+	ctx.arc(x,y,25,0,2*Math.PI,true);
+	ctx.strokeStyle = "white";
+	ctx.stroke();
+	ctx.fillStyle = "yellow";
+	ctx.fill();
+
+	ctx.beginPath();
+	ctx.arc(x+15,y,20,0,2*Math.PI,true);
+	ctx.strokeStyle = "#7BADFF";
+	ctx.stroke();
+	ctx.fillStyle = "#7BADFF";
+	ctx.fill();
+
+
+
+ }
+
+ function draw2(ctx,x,y){   /*draw the second object */
+ 	ctx.beginPath();
+	ctx.moveTo(x,y);
+	ctx.quadraticCurveTo(x+25,y,x, y-40);
+	ctx.stroke();
+	ctx.fillStyle = "blue";
+	ctx.fill();
+
+	ctx.beginPath();
+	ctx.moveTo(x,y);
+	ctx.quadraticCurveTo(x-25,y,x,y-40);
+	ctx.stroke;
+	ctx.fillStyle = "blue";
+	ctx.fill();
+
+	ctx.beginPath();
+	ctx.moveTo(x-12.5,y-3);
+	ctx.lineTo(x+12.5,y-3);
+	ctx.lineTo(x+25,y+5);
+	ctx.lineTo(x-25,y+5);
+	ctx.stroke();
+	ctx.fillStyle = "red";
+	ctx.fill();
+	ctx.beginPath();
+	ctx.moveTo(x-12.5,y+5);
+	ctx.lineTo(x-6.25,y+10);
+	ctx.lineTo(x,y+5);
+	ctx.stroke();
+	ctx.fillStyle = "grey";
+	ctx.fill();
+	ctx.beginPath();
+	ctx.moveTo(x+12.5,y+5);
+	ctx.lineTo(x+6.25,y+10);
+	ctx.lineTo(x,y+5);
+	ctx.stroke();
+	ctx.fillStyle = "grey";
+	ctx.fill();
+ }
+
+ function draw3(ctx,x,y){  /*draw the third object */
+ 	ctx.beginPath();
+	ctx.moveTo(x, y);
+	ctx.bezierCurveTo(x, y-40, x+50, y-40, x+50, y);
+	ctx.strokeStyle = "black";
+	ctx.stroke();
+	ctx.fillStyle = "grey";
+	ctx.fill();
+	ctx.beginPath();
+	ctx.moveTo(x,y);
+	ctx.lineTo(x+50,y);
+	ctx.stroke();
+	ctx.beginPath();
+	ctx.arc(x+6.25,y+5,5,0,Math.PI *2, true);
+	ctx.fillStyle = "purple";
+	ctx.fill();
+	ctx.arc(x+25,y+5,5,0,Math.PI*2, true);
+	ctx.fillStyle = "purple";
+	ctx.fill();
+	ctx.beginPath();
+	ctx.arc(x+43.75, y+5, 5,0,Math.PI*2, true);
+	ctx.fillStyle = "purple";
+	ctx.fill();
+ }
+
+ function draw4(ctx,x,y){ /* draw the fourth object */
+ 	ctx.beginPath();
+	ctx.moveTo(x,y);
+	ctx.arc(x,y,17.5,0,Math.PI*2,true);
+	ctx.fillStyle = "#ffe6e6";
+	ctx.fill();
+
+	ctx.beginPath();
+	ctx.moveTo(x-20,y+17.5);
+	ctx.lineTo(x+20,y+17.5);
+	ctx.lineTo(x+20,y+27.5);
+	ctx.lineTo(x-20,y+27.5);
+	ctx.lineTo(x-20,y+17.5);
+	ctx.stroke();
+	ctx.fillStyle = "orange";
+	ctx.fill();
+	ctx.beginPath();
+	ctx.arc(x-12.5,y+30,2.5,0,Math.PI*2,true);
+	ctx.fillStyle = "green";
+	ctx.fill();
+	ctx.beginPath();
+	ctx.arc(x+12.5,y+30,2.5,0,Math.PI*2,true);
+	ctx.fillStyle = "green";
+	ctx.fill();
+
+	ctx.beginPath();
+	ctx.arc(x-10,y-7.5,2.5,0,Math.PI*2,true);
+	ctx.fillStyle = "black";
+	ctx.fill();
+	ctx.beginPath();
+	ctx.arc(x+10,y-7.5,2.5,0,Math.PI*2,true);
+	ctx.fillStyle = "black";
+	ctx.fill();
+
+	ctx.beginPath();
+	ctx.moveTo(x+10,y+5);
+	ctx.bezierCurveTo(x+10,y+12.5,x-10,y+12.5,x-10,y+5);
+	ctx.fillStyle = "red";
+	ctx.fill();
+
+	ctx.beginPath();
+	ctx.arc(x-22.5,y+22.5,2.5,0,Math.PI*2,true);
+	ctx.fillStyle = "green";
+	ctx.fill();
+
+	ctx.beginPath();
+	ctx.arc(x+22.5,y+22.5,2.5,0,Math.PI*2,true);
+	ctx.fillStyle = "green";
+	ctx.fill();
+
+	ctx.beginPath();
+	ctx.arc(x-21.25,y,3.75,0,Math.PI*2,true);
+	ctx.fillStyle = "green";
+	ctx.fill();
+
+	ctx.beginPath();
+	ctx.arc(x+21.25,y, 3.75,0,Math.PI*2, true);
+	ctx.fillStyle = "green";
+	ctx.fill();
+
+ }
+
+function draw5(ctx,x,y){ /* draw the fourth object */
+	ctx.beginPath();
+	ctx.arc(x,y,25,0,Math.PI*2,true);
+	ctx.fillStyle = "#996600";
+	ctx.fill();
+
+	ctx.beginPath();
+	ctx.lineJoin = "round";
+	ctx.lineWidth = 5;
+	ctx.moveTo(x-20,y+15);
+	ctx.lineTo(x-25,y+25);
+	ctx.lineTo(x-15,y+20);
+	ctx.strokeStyle = "black";
+	ctx.stroke();
+
+	ctx.beginPath();
+	ctx.lineJoin = "round";
+	ctx.lineWidth = 5;
+	ctx.moveTo(x+15,y-20);
+	ctx.lineTo(x+25,y-25);
+	ctx.lineTo(x+20,y-15);
+	ctx.strokeStyle = "black";
+	ctx.stroke();
+
+	ctx.beginPath();
+	ctx.moveTo(x-15,y+20);
+	ctx.lineTo(x+20,y-15);
+	ctx.lineWidth = 5;
+	ctx.strokeStyle = "black";
+	ctx.stroke();
+
+ }
+
+ function draw6(ctx,x,y){ /* draw the fourth object */
+ 	ctx.beginPath();
+	ctx.moveTo(x-25,y-20);
+	ctx.lineTo(x-20,y-25);
+	ctx.lineTo(x+25,y+20);
+	ctx.lineTo(x+20,y+25);	
+	ctx.stroke();
+	ctx.fillStyle = "black";
+	ctx.fill();
+
+	ctx.beginPath();
+	ctx.moveTo(x-25,y+12.5);
+	ctx.lineTo(x-12.5,y+25);
+	ctx.lineTo(x+15,y-2.5);
+	ctx.lineTo(x+2.5,y-15);
+	ctx.fillStyle = "blue";
+	ctx.fill();
+
+	ctx.beginPath();
+	ctx.lineWidth = 1;
+	ctx.moveTo(x+15,y-2.5)
+	ctx.bezierCurveTo(x+25,y-12.5,x+12.5,y-25,x+2.5,y-15);
+	ctx.strokeStyle = "black";
+	ctx.stroke();
+
+ }
+
+ function draw7(ctx,x,y){ /* draw the fourth object */
+ 	var anothergrd = ctx.createRadialGradient(x,y,1,x,y,30);
+	anothergrd.addColorStop(0,"red");
+	anothergrd.addColorStop(1,"white");
+	ctx.beginPath();
+	ctx.arc(x,y,25,0,Math.PI*2,true);
+	ctx.lineWidth = 3;
+	ctx.strokeStyle = "black";
+	ctx.stroke();
+	ctx.fillStyle = anothergrd;
+	ctx.fill();
+
+
+	ctx.beginPath();
+	ctx.lineJoin = "round";
+	ctx.lineWidth = 3;
+	ctx.moveTo(x-20,y+15);
+	ctx.lineTo(x-25,y+25);
+	ctx.lineTo(x-15,y+20);
+	ctx.strokeStyle = "black";
+	ctx.stroke();
+
+	ctx.beginPath();
+	ctx.lineJoin = "round";
+	ctx.lineWidth = 3;
+	ctx.moveTo(x+15,y-20);
+	ctx.lineTo(x+25,y-25);
+	ctx.lineTo(x+20,y-15);
+	ctx.strokeStyle = "black";
+	ctx.stroke();
+
+	ctx.beginPath();
+	ctx.moveTo(x-15,y+20);
+	ctx.lineTo(x+20,y-15);
+	ctx.lineWidth = 3;
+	ctx.strokeStyle = "black";
+	ctx.stroke();
+ }
+
+ function draw8(ctx,x,y){      /* draw the fourth object */
+ 	ctx.beginPath();
+	ctx.arc(x,y,25,0,Math.PI*2,true);
+	ctx.lineWidth = 1;
+	ctx.strokeStyle = "black";
+	ctx.stroke();
+
+	ctx.beginPath();
+	ctx.moveTo(x-20,y-5);
+	ctx.lineTo(x-20,y+5);
+	ctx.lineTo(x+20,y+5);
+	ctx.lineTo(x+20,y-5);
+	ctx.fillStyle = "red";
+	ctx.fill();
+
+	ctx.beginPath();
+	ctx.moveTo(x-5,y-20);
+	ctx.lineTo(x+5,y-20);
+	ctx.lineTo(x+5,y+20);
+	ctx.lineTo(x-5,y+20);
+	ctx.fillStyle = "red";
+	ctx.fill();
+
+	ctx.beginPath();
+	ctx.arc(x,y,6,0,Math.PI*2,true);
+	ctx.fillStyle = "black";
+	ctx.fill();
+
+ }
+
+ function draw9(ctx,x,y){ /* draw the fourth object */
+ 	var grd=ctx.createLinearGradient(x-25,y-25,x+25,y+25);
+	grd.addColorStop(0,"black");
+	grd.addColorStop("0.2","#cc3300");
+	grd.addColorStop("0.4","#0033cc");
+	grd.addColorStop("0.6","#009933");
+	grd.addColorStop("0.8","#ff0066");
+	grd.addColorStop(1,"#ccccff");
+
+	ctx.beginPath();
+	ctx.arc(x,y,25,0,Math.PI*2,true);
+	ctx.lineWidth = 2;
+	ctx.strokeStyle = "black";
+	ctx.stroke();
+	ctx.fillStyle = grd;
+	ctx.fill();
+ }
+
+ function draw10(ctx,x,y){ /* draw the fourth object */
+ 	ctx.beginPath();
+	ctx.moveTo(x,y-25);
+	ctx.lineTo(x-10,y-10);
+	ctx.lineTo(x-25,y);
+	ctx.lineTo(x-10,y+10);
+	ctx.lineTo(x,y+25);  //fifth point
+	ctx.lineTo(x+10,y+10);
+	ctx.lineTo(x+25,y);
+	ctx.lineTo(x+10,y-10);
+	ctx.lineTo(x,y-25);
+
+	ctx.stroke();
+	ctx.fillStyle = "yellow";
+	ctx.fill();
+
+	ctx.beginPath();
+	ctx.moveTo(x-17.5,y-25);
+	ctx.lineTo(x-20,y-20);
+	ctx.lineTo(x-25,y-17.5);
+	ctx.lineTo(x-20,y-15);
+	ctx.lineTo(x-17.5,y-10);
+	ctx.lineTo(x-15,y-15);
+	ctx.lineTo(x-10,y-17.5);
+	ctx.lineTo(x-15,y-20);
+	ctx.lineTo(x-17.5,y-25);
+	ctx.stroke();
+	ctx.fillStyle = "yellow";
+	ctx.fill();
+
+	ctx.beginPath();  //the second mini star
+	ctx.moveTo(x+17.5,y-25);
+	ctx.lineTo(x+20,y-20);
+	ctx.lineTo(x+25,y-17.5);
+	ctx.lineTo(x+20,y-15);
+	ctx.lineTo(x+17.5,y-10);
+	ctx.lineTo(x+15,y-15);
+	ctx.lineTo(x+10,y-17.5);
+	ctx.lineTo(x+15,y-20);
+	ctx.lineTo(x+17.5,y-25);
+	ctx.stroke();
+	ctx.fillStyle = "yellow";
+	ctx.fill();
+
+	ctx.beginPath();  //the third mini star
+	ctx.moveTo(x+17.5,y+25);
+	ctx.lineTo(x+20,y+20);
+	ctx.lineTo(x+25,y+17.5);
+	ctx.lineTo(x+20,y+15);
+	ctx.lineTo(x+17.5,y+10);
+	ctx.lineTo(x+15,y+15);
+	ctx.lineTo(x+10,y+17.5);
+	ctx.lineTo(x+15,y+20);
+	ctx.lineTo(x+17.5,y+25);
+	ctx.stroke();
+	ctx.fillStyle = "yellow";
+	ctx.fill();
+
+	ctx.beginPath();  //the forth mini star
+	ctx.moveTo(x-17.5,y+25);
+	ctx.lineTo(x-20,y+20);
+	ctx.lineTo(x-25,y+17.5);
+	ctx.lineTo(x-20,y+15);
+	ctx.lineTo(x-17.5,y+10);
+	ctx.lineTo(x-15,y+15);
+	ctx.lineTo(x-10,y+17.5);
+	ctx.lineTo(x-15,y+20);
+	ctx.lineTo(x-17.5,y+25);
+	ctx.stroke();
+	ctx.fillStyle = "yellow";
+	ctx.fill();
+ }
+
+function animate1(ctx,object){
+
+	ctx.clearRect(object.x - 25, object.y - 25, 50,50);
+ 	
+ 	if(object.x > 974){
+ 		object.xspeed = -object.xspeed;
+ 		object.x += object.xspeed;
+ 	}else if(object.x < 26){
+ 		object.xspeed = -object.xspeed;
+ 		object.x += object.xspeed;
+ 	}else{
+ 		object.x += object.xspeed;
+ 	}
+
+ 	if(object.y > 614){
+ 		object.yspeed = -object.yspeed;
+ 		object.y += object.yspeed;
+ 	}else if(object.y < 26){
+ 		object.yspeed = -object.yspeed;
+ 		object.y += object.yspeed;
+ 	}else{
+ 		object.y += object.yspeed;
+ 	}
+
+ 	draw1(ctx,object.x,object.y);
+
+ }
+
+
+ function animate2(ctx,object){
+
+ }
+ function animate3(ctx,object){
+ 	
+ }
+ function animate4(ctx,object){
+ 	
+ }
+ function animate5(ctx,object){
+ 	
+ }
+ function animate6(ctx,object){
+ 	
+ }
+ function animate7(ctx,object){
+ 	
+ }
+ function animate8(ctx,object){
+ 	
+ }
+ function animate9(ctx,object){
+ 	
+ }
+ function animate10(ctx,object){
+ 	
+ }
+
+
+//----------------------------------------分割线---------------------------------------------------
+
 $(document).ready(function() {
 	if (typeof(Storage) !== "undefined") {
 		/* use this variable currentState to control what scene to show
