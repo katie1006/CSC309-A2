@@ -552,6 +552,7 @@ function switchScene() {
 		$('#game_page').toggleClass('hide show');
 		currentState++;
 		clearInterval(blackHoleMethod);
+		clearInterval(drawGameMethod);
 		
 		if (currentState == 2) {
 			// switched to level 1 summary page
@@ -588,6 +589,7 @@ function pause() {
 		$('#overlay').toggleClass('hide show');
 		timerMethod = setInterval(clock, 1000);
 		blackHoleMethod = setInterval(createBlackHole, 1000);
+		drawGameMethod = setInterval(drawGame, 33);
 		
 		$('#pause_button').html('Pause');
 		paused = false;
@@ -596,6 +598,7 @@ function pause() {
 		$('#overlay').toggleClass('hide show').css('left', (rect.left-6.5)+"px");
 		clearInterval(timerMethod);
 		clearInterval(blackHoleMethod);
+		clearInterval(drawGameMethod);
 		
 		$('#pause_button').html('Resume');
 		paused = true;
