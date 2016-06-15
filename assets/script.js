@@ -575,7 +575,7 @@ function switchScene() {
 			
 			// draw the game objects
 			drawSpaceObjectsWithoutUpdate();
-			blackHoleMethod = setInterval(createBlackHole, 3000);
+			blackHoleMethod = setInterval(createBlackHole, 2000/level);
 			drawGameMethod = setInterval(drawGame, 33);
 		}
 	}
@@ -585,7 +585,7 @@ function pause() {
 	if (paused) { // resume game
 		$('#overlay').toggleClass('hide show');
 		timerMethod = setInterval(clock, 1000);
-		blackHoleMethod = setInterval(createBlackHole, 1000);
+		blackHoleMethod = setInterval(createBlackHole, 4000/(currentState+1));
 		drawGameMethod = setInterval(drawGame, 33);
 		
 		$('#pause_button').html('Pause');
