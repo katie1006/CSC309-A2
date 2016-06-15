@@ -136,6 +136,12 @@ $(document).ready(function() {
 	});
 });
 
+// -----------------------declaring an localstorage ,which is an array of high scores here.
+
+var twentyscores = [];
+localStorage.setItem("twenty",twentyscores);
+//------------------------------------------------------------------------
+
 function switchScene() {
 	if (currentState == 4) { // finished game, restart
 		console.log('game finished');
@@ -144,6 +150,11 @@ function switchScene() {
 		$('#page_title').html('Solar Game');
 		$('#page_button').html('START');
 		// insert top scores
+
+		//sort the array of scores in descending orders ----------------------------------------------
+		localStorage.getItem("twenty").sort(function(a,b){return b - a});
+		//----------------------------------------------------------------------
+
 		
 		currentState = 0;
 	} else {
@@ -167,6 +178,11 @@ function switchScene() {
 			$('#page_title').html('Level# 2');
 			$('#page_button').html('FINISH');
 			$('#level_score').html(currentScore);
+
+			//storing the score of this attempt  -------------------------------------------------
+			localStorage.getItem("twenty").push(currentScore);
+			//----------------------------------------------------------------------
+
 			
 		} else { // 1 or 3
 			// switched to game page
