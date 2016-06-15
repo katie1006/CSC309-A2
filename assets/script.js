@@ -128,38 +128,7 @@ var object10 = { //star
 //array of 10 objects
 var tenobjects = [object1,object2,object3,object4,object5,object6,object7,object8,object9,object10];
 
-window.onload = function(){
-    
-    var c = document.getElementById("view_port");
-	var ctx = c.getContext("2d");
-	//usually maximum of x-coordinate is 975 and minimum is 25
-	//usually maximum of y-coordinate is 615 and minimum is 25
-	//975-25 = 950  ,    615-25 = 590;
-	//but for the UFO, maximum of x-coordinate is 950 and minimum is 0
-	// the interface is 1000 width and 640 height 
-
-	draw1(ctx,object1.x,object1.y);//the cresent moon
-	draw2(ctx,object2.x,object2.y);  //the rocket
-	draw3(ctx,object3.x,object3.y); // the UFO
-	draw4(ctx,object4.x,object4.y);//the astronaut
-	draw5(ctx,object5.x,object5.y); // the saturn
-	draw6(ctx,object6.x,object6.y); //the surveillance aircraft
-	draw7(ctx,object7.x,object7.y);//the unknown planet
-	draw8(ctx,object8.x,object8.y);//the garbage
-	draw9(ctx,object9.x,object9.y);  //a really colorful planet
-	draw10(ctx,object10.x,object10.y);  // a star
-
-
-	//animate(ctx,tenobjects);
-	
- 
-}
-	
-
 function draw1(ctx, x,y){   //moon
- 	
- 
-
  	ctx.beginPath();
 	ctx.arc(x,y,25,0,2*Math.PI,true);
 	ctx.strokeStyle = "white";
@@ -173,9 +142,6 @@ function draw1(ctx, x,y){   //moon
 	ctx.stroke();
 	ctx.fillStyle = "#7BADFF";
 	ctx.fill();
-
-
-
  }
 
  function draw2(ctx,x,y){   //rocket 
@@ -567,11 +533,6 @@ function animate(ctx,array){
 	setTimeout(animate(ctx,array),33);
  }
 
-
-
-
-//----------------------------------------分割线---------------------------------------------------
-
 $(document).ready(function() {
 	if (typeof(Storage) !== "undefined") {
 		/* use this variable currentState to control what scene to show
@@ -673,7 +634,7 @@ function clock() {
 
 function drawGame() {
 	blackHoleMethod = setInterval(createBlackHole, 3000);
-	
+	drawSpaceObjects();
 }
 
 function createBlackHole() {
@@ -724,4 +685,26 @@ function onCanvasClicked(event) {
 				break;
 			}
 	}
+}
+
+function drawSpaceObjects() {
+	//usually maximum of x-coordinate is 975 and minimum is 25
+	//usually maximum of y-coordinate is 615 and minimum is 25
+	//975-25 = 950  ,    615-25 = 590;
+	//but for the UFO, maximum of x-coordinate is 950 and minimum is 0
+	// the interface is 1000 width and 640 height 
+
+	draw1(window.ctx,object1.x,object1.y);//the cresent moon
+	draw2(window.ctx,object2.x,object2.y);  //the rocket
+	draw3(window.ctx,object3.x,object3.y); // the UFO
+	draw4(window.ctx,object4.x,object4.y);//the astronaut
+	draw5(window.ctx,object5.x,object5.y); // the saturn
+	draw6(window.ctx,object6.x,object6.y); //the surveillance aircraft
+	draw7(window.ctx,object7.x,object7.y);//the unknown planet
+	draw8(window.ctx,object8.x,object8.y);//the garbage
+	draw9(window.ctx,object9.x,object9.y);  //a really colorful planet
+	draw10(window.ctx,object10.x,object10.y);  // a star
+
+
+	//animate(ctx,tenobjects);
 }
