@@ -24,15 +24,15 @@ var BlackHole = function(type, x, y, img) {
 	this.y = y;
 	this.img = img;
 	if (type == type_blue_hole) {
-		this.speed = 0.5;
+		this.pullDuration = 8; // how long does it take to pull the object
 		this.full = 3;
 		this.point = 5;
 	} else if (type == type_purple_hole) { 
-		this.speed = 1;
+		this.pullDuration = 4;
 		this.full = 2;
 		this.point = 10;
 	} else if (type == type_black_hole) { 
-		this.speed = 2;
+		this.pullDuration = 2;
 		this.full = 1;
 		this.point = 20;
 	} else {
@@ -66,11 +66,22 @@ var SpaceObject = function(x,y,draw) {
 
 	this.xspeed = Math.random() * 2 * speedMultiplier - speedMultiplier;
 	this.yspeed = Math.random() * 2 * speedMultiplier - speedMultiplier;
+	this.toBlackHoleSpeedX = -9999;
+	this.toBlackHoleSpeedY = -9999;
+	this.blackHoleX = -9999;
+	this.blackHoleY = -9999;
 	this.update = objectUpdate;
 }
 
 // uniform update function for all 10 objects
 function objectUpdate(){
+	if (this.toBlackHoleSpeedX != -9999) {
+		// check if it reaches the center
+
+		this.x += this.toBlackHoleSpeedX;
+		this.y += this.toBlackHoleSpeedY;
+	} else {
+		// check if reach the wall
 		if (this.x > 1000 || this.x < 0) {
 			this.xspeed = -this.xspeed;
 		}
@@ -78,8 +89,26 @@ function objectUpdate(){
 			this.yspeed = -this.yspeed;
 		}
 
+		// check if is pulled by any black hole
+		for (var i=0; i<blackHoles.length; i++) {
+			if (!(this.x-25 > blackHoles[i].x+75
+				|| this.x+25 < blackHoles[i].x-25
+				|| this.y-25 > blackHoles[i].y+75
+				|| this.y+25 < blackHoles[i].y-25)) {
+				// yes! moving toward the lovely black hole!
+				this.toBlackHoleSpeedX = (blackHoles[i].x + 25 - this.x) / blackHoles[i].pullDuration;
+				this.toBlackHoleSpeedY = (blackHoles[i].y + 25 - this.y) / blackHoles[i].pullDuration;
+			}
+		}
+
+		if (this.toBlackHoleSpeedX > 0) {
+			this.x += this.toBlackHoleSpeedX;
+			this.y += this.toBlackHoleSpeedY;
+		} else {
 			this.x += this.xspeed;
 			this.y += this.yspeed;
+		}
+	}
 
 	this.draw(window.ctx);
 }
