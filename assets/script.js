@@ -4,6 +4,8 @@ var timerMethod;
 var timerCount = 60;
 var paused = false;
 var currentScore = 200;
+var canvasTop = -1;
+var canvasLeft = -1;
 
 // Black hole constants
 var type_blue_hole = 0;
@@ -16,7 +18,9 @@ var path_black_hole = "assets/images/black_hole.svg";
 
 // Constructor for black holes
 var blackHoles = new Array();
-var BlackHole = function(type) {
+var BlackHole = function(type, x, y) {
+	this.x = x;
+	this.y = y;
 	if (type == type_blue_hole) {
 		this.speed = 0.5;
 		this.full = 3;
@@ -583,6 +587,8 @@ $(document).ready(function() {
 	$(window).resize(function() {
 		var rect = document.getElementById('view_port').getBoundingClientRect();
 		$('#overlay').css('left', (rect.left-6.5)+"px");
+		canvasTop = rect.top;
+		canvasLeft = rect.left;
 	});
 });
 
@@ -622,6 +628,9 @@ function switchScene() {
 			timerMethod = setInterval(clock, 1000);
 			
 			$('#view_port').click(onCanvasClicked);
+			var canvasRect = document.getElementById('view_port').getBoundingClientRect();
+			canvasTop = canvasRect.top;
+			canvasLeft = canvasRect.left;
 			
 			// draw the game objects
 			drawGame();
@@ -682,20 +691,37 @@ function createBlackHole() {
 	var newBlackHole;
 	if (rand > 0.5) { // blue, most frequent
 		img.src = path_blue_hole;
-		newBlackHole = new BlackHole(0);
+		newBlackHole = new BlackHole(0, x, y);
 	} else if (rand > 0.15) { // purple, infrequent
 		img.src = path_purple_hole;
-		newBlackHole = new BlackHole(1);
+		newBlackHole = new BlackHole(1, x, y);
 	} else { // black, rare
 		img.src = path_black_hole;
-		newBlackHole = new BlackHole(2);
-	}
-	img.onclick = function() {
-		console.log("clicked!");
+		newBlackHole = new BlackHole(2, x, y);
 	}
 	blackHoles.push(newBlackHole);
 }
 
 function onCanvasClicked(event) {
 	console.log("canvas click");
+	var xOnCanvas = event.pageX - canvasLeft;
+	var yOnCanvas = event.pageY - canvasTop;
+	
+	// check if clicked on any black holes
+	/*	Note:
+		BlackHole object will be considered as clicked if it falls within
+		25px of the coordinates of the click event.
+		Since the coordinates of the BlackHole objects are their top left
+		corner, and BlackHole objects has a width of 50px and a height of
+		50px, all clicks within (x-25,y-25) and (x+75,y+75) will be considered
+		as clicking on the object.
+	 */
+	for (var i=0; i<blackHoles.length; i++) {
+		var bh = blackHoles[i];
+		if (xOnCanvas > bh.x-25 && xOnCanvas < bh.x+75
+			&& yOnCanvas > bh.y-25 && yOnCanvas < bh.y+75) {
+				console.log('click on a bh!');
+				break;
+			}
+	}
 }
