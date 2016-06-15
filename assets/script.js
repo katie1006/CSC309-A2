@@ -19,9 +19,10 @@ var path_black_hole = "assets/images/black_hole.svg";
 
 // Constructor for black holes
 var blackHoles = new Array();
-var BlackHole = function(type, x, y) {
+var BlackHole = function(type, x, y, img) {
 	this.x = x;
 	this.y = y;
+	this.img = img;
 	if (type == type_blue_hole) {
 		this.speed = 0.5;
 		this.full = 3;
@@ -44,6 +45,12 @@ BlackHole.prototype.onclick = function() {
 	// dismiss this object
 	
 	// increase the score
+}
+BlackHole.prototype.draw = function() {
+	// the top left corner of the image is at (x,y)
+	window.ctx.drawImage(this.img, this.x, this.y, 50, 50);
+	// debug purpose
+	window.ctx.strokeRect(this.x-25,this.y-25,100,100);
 }
 var blackHoleMethod;
 
@@ -617,6 +624,11 @@ function drawGame() {
 	for (var i=0; i<spaceObjects.length; i++) {
 		spaceObjects[i].update();
 	}
+	
+	// draw black holes, if any
+	for (var j=0; j<blackHoles.length; j++) {
+		blackHoles[j].draw();
+	}
 }
 
 function createBlackHole() {
@@ -624,23 +636,17 @@ function createBlackHole() {
 	var img = new Image();
 	var x = Math.random()*950;
 	var y = Math.random()*590;
-	img.onload = function() {
-		// the top left corner of the image is at (x,y)
-		window.ctx.drawImage(img, x, y, 50, 50);
-		// debug purpose
-		window.ctx.strokeRect(x-25,y-25,100,100);
-	}
 	
 	var newBlackHole;
 	if (rand > 0.5) { // blue, most frequent
 		img.src = path_blue_hole;
-		newBlackHole = new BlackHole(0, x, y);
+		newBlackHole = new BlackHole(0, x, y, img);
 	} else if (rand > 0.15) { // purple, infrequent
 		img.src = path_purple_hole;
-		newBlackHole = new BlackHole(1, x, y);
+		newBlackHole = new BlackHole(1, x, y, img);
 	} else { // black, rare
 		img.src = path_black_hole;
-		newBlackHole = new BlackHole(2, x, y);
+		newBlackHole = new BlackHole(2, x, y, img);
 	}
 	blackHoles.push(newBlackHole);
 }
