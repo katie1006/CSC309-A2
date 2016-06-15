@@ -58,456 +58,34 @@ var speedMultiplier = 5;
 //declaring and randomly initializing 10 objects
 //while animating,remember to update the coordicate of every objects(deletable)
 // Note: coordinate of these 10 objects are the center!
-var object1 = {     //moon
-	x:Math.random() * 950 + 25,
-	y:Math.random() * 590 + 25,
-	xspeed: Math.random() * 2 * speedMultiplier - speedMultiplier,
-	yspeed: Math.random() * 2 * speedMultiplier - speedMultiplier,
-	draw: function(ctx){
-		ctx.beginPath();
-		ctx.arc(this.x, this.y, 25, 0, 2*Math.PI, true);
-		ctx.strokeStyle = "white";
-		ctx.stroke();
-		ctx.fillStyle = "yellow";
-		ctx.fill();
 
-		ctx.beginPath();
-		ctx.arc(this.x+15, this.y, 20, 0, 2*Math.PI, true);
-		ctx.strokeStyle = "#7BADFF";
-		ctx.stroke();
-		ctx.fillStyle = "#7BADFF";
-		ctx.fill();
-	},
-	update: objectUpdate,
-	pullTo: function(blackHoleX, blackHoleY) {
+var SpaceObject = function(x,y,draw) {
+	this.x = x;
+	this.y = y;
+	this.draw = draw;
 
-	}
-}
-
-var object2 = {   //rocket
-	x:Math.random() * 950 + 25,
-	y:Math.random() * 590 + 40,
-	xspeed: Math.random() * 2 * speedMultiplier - speedMultiplier,
-	yspeed: Math.random() * 2 * speedMultiplier - speedMultiplier,
-	draw: function(ctx){
-		ctx.beginPath();
-		ctx.moveTo(this.x, this.y);
-		ctx.quadraticCurveTo(this.x+25, this.y, this.x, this.y-40);
-		ctx.stroke();
-		ctx.fillStyle = "blue";
-		ctx.fill();
-
-		ctx.beginPath();
-		ctx.moveTo(this.x,this.y);
-		ctx.quadraticCurveTo(this.x-25, this.y, this.x, this.y-40);
-		ctx.stroke;
-		ctx.fillStyle = "blue";
-		ctx.fill();
-
-		ctx.beginPath();
-		ctx.moveTo(this.x-12.5, this.y-3);
-		ctx.lineTo(this.x+12.5, this.y-3);
-		ctx.lineTo(this.x+25, this.y+5);
-		ctx.lineTo(this.x-25, this.y+5);
-		ctx.stroke();
-		ctx.fillStyle = "red";
-		ctx.fill();
-		ctx.beginPath();
-		ctx.moveTo(this.x-12.5, this.y+5);
-		ctx.lineTo(this.x-6.25, this.y+10);
-		ctx.lineTo(this.x, this.y+5);
-		ctx.stroke();
-		ctx.fillStyle = "grey";
-		ctx.fill();
-		ctx.beginPath();
-		ctx.moveTo(this.x+12.5, this.y+5);
-		ctx.lineTo(this.x+6.25, this.y+10);
-		ctx.lineTo(this.x, this.y+5);
-		ctx.stroke();
-		ctx.fillStyle = "grey";
-		ctx.fill();
-	},
-	update: objectUpdate
-}
-
-var object3 = { //UFO
-	x:Math.random() * 950,
-	y:Math.random() * 590 + 40,
-	xspeed: Math.random() * 2 * speedMultiplier - speedMultiplier,
-	yspeed: Math.random() * 2 * speedMultiplier - speedMultiplier,
-	draw: function(ctx){
-		ctx.beginPath();
-		ctx.moveTo(this.x, this.y);
-		ctx.bezierCurveTo(this.x, this.y-40, this.x+50, this.y-40, this.x+50, this.y);
-		ctx.strokeStyle = "black";
-		ctx.stroke();
-		ctx.fillStyle = "grey";
-		ctx.fill();
-		ctx.beginPath();
-		ctx.moveTo(this.x, this.y);
-		ctx.lineTo(this.x+50, this.y);
-		ctx.stroke();
-		ctx.beginPath();
-		ctx.arc(this.x+6.25, this.y+5, 5, 0, Math.PI *2, true);
-		ctx.fillStyle = "purple";
-		ctx.fill();
-		ctx.arc(this.x+25, this.y+5, 5, 0, Math.PI*2, true);
-		ctx.fillStyle = "purple";
-		ctx.fill();
-		ctx.beginPath();
-		ctx.arc(this.x+43.75, this.y+5, 5, 0, Math.PI*2, true);
-		ctx.fillStyle = "purple";
-		ctx.fill();
-	},
-	update: objectUpdate
-}
-
-var object4 = { //the astronaut
-	x:Math.random() * 950 + 25,
-	y:Math.random() * 590 + 20,
-	xspeed: Math.random() * 2 * speedMultiplier - speedMultiplier,
-	yspeed: Math.random() * 2 * speedMultiplier - speedMultiplier,
-	draw: function(ctx){
-		ctx.beginPath();
-		ctx.moveTo(this.x, this.y);
-		ctx.arc(this.x, this.y, 17.5, 0, Math.PI*2, true);
-		ctx.fillStyle = "#ffe6e6";
-		ctx.fill();
-
-		ctx.beginPath();
-		ctx.moveTo(this.x-20, this.y+17.5);
-		ctx.lineTo(this.x+20, this.y+17.5);
-		ctx.lineTo(this.x+20, this.y+27.5);
-		ctx.lineTo(this.x-20, this.y+27.5);
-		ctx.lineTo(this.x-20, this.y+17.5);
-		ctx.stroke();
-		ctx.fillStyle = "orange";
-		ctx.fill();
-		ctx.beginPath();
-		ctx.arc(this.x-12.5, this.y+30, 2.5, 0, Math.PI*2, true);
-		ctx.fillStyle = "green";
-		ctx.fill();
-		ctx.beginPath();
-		ctx.arc(this.x+12.5, this.y+30, 2.5, 0, Math.PI*2, true);
-		ctx.fillStyle = "green";
-		ctx.fill();
-
-		ctx.beginPath();
-		ctx.arc(this.x-10, this.y-7.5, 2.5, 0, Math.PI*2, true);
-		ctx.fillStyle = "black";
-		ctx.fill();
-		ctx.beginPath();
-		ctx.arc(this.x+10, this.y-7.5, 2.5, 0, Math.PI*2, true);
-		ctx.fillStyle = "black";
-		ctx.fill();
-
-		ctx.beginPath();
-		ctx.moveTo(this.x+10, this.y+5);
-		ctx.bezierCurveTo(this.x+10, this.y+12.5, this.x-10, this.y+12.5, this.x-10, this.y+5);
-		ctx.fillStyle = "red";
-		ctx.fill();
-
-		ctx.beginPath();
-		ctx.arc(this.x-22.5, this.y+22.5, 2.5, 0, Math.PI*2, true);
-		ctx.fillStyle = "green";
-		ctx.fill();
-
-		ctx.beginPath();
-		ctx.arc(this.x+22.5, this.y+22.5, 2.5, 0, Math.PI*2, true);
-		ctx.fillStyle = "green";
-		ctx.fill();
-
-		ctx.beginPath();
-		ctx.arc(this.x-21.25, this.y, 3.75, 0, Math.PI*2, true);
-		ctx.fillStyle = "green";
-		ctx.fill();
-
-		ctx.beginPath();
-		ctx.arc(this.x+21.25, this.y, 3.75, 0, Math.PI*2, true);
-		ctx.fillStyle = "green";
-		ctx.fill();
-	},
-	update: objectUpdate
-}
-
-var object5 = { //saturn 
-	x:Math.random() * 950 + 25,
-	y:Math.random() * 590 + 25,
-	xspeed: Math.random() * 2 * speedMultiplier - speedMultiplier,
-	yspeed: Math.random() * 2 * speedMultiplier - speedMultiplier,
-	draw: function(ctx){
-		ctx.beginPath();
-		ctx.arc(this.x, this.y, 25, 0, Math.PI*2, true);
-		ctx.fillStyle = "#996600";
-		ctx.fill();
-
-		ctx.beginPath();
-		ctx.lineJoin = "round";
-		ctx.lineWidth = 5;
-		ctx.moveTo(this.x-20, this.y+15);
-		ctx.lineTo(this.x-25, this.y+25);
-		ctx.lineTo(this.x-15, this.y+20);
-		ctx.strokeStyle = "black";
-		ctx.stroke();
-
-		ctx.beginPath();
-		ctx.lineJoin = "round";
-		ctx.lineWidth = 5;
-		ctx.moveTo(this.x+15, this.y-20);
-		ctx.lineTo(this.x+25, this.y-25);
-		ctx.lineTo(this.x+20, this.y-15);
-		ctx.strokeStyle = "black";
-		ctx.stroke();
-
-		ctx.beginPath();
-		ctx.moveTo(this.x-15, this.y+20);
-		ctx.lineTo(this.x+20, this.y-15);
-		ctx.lineWidth = 5;
-		ctx.strokeStyle = "black";
-		ctx.stroke();
-	},
-	update: objectUpdate
-}
-
-var object6 = { //surveillance aircraft
-	x:Math.random() * 950 + 25,
-	y:Math.random() * 590 + 25,
-	xspeed: Math.random() * 2 * speedMultiplier - speedMultiplier,
-	yspeed: Math.random() * 2 * speedMultiplier - speedMultiplier,
-	draw: function(ctx){
-		ctx.beginPath();
-		ctx.moveTo(this.x-25, this.y-20);
-		ctx.lineTo(this.x-20, this.y-25);
-		ctx.lineTo(this.x+25, this.y+20);
-		ctx.lineTo(this.x+20, this.y+25);	
-		ctx.stroke();
-		ctx.fillStyle = "black";
-		ctx.fill();
-
-		ctx.beginPath();
-		ctx.moveTo(this.x-25, this.y+12.5);
-		ctx.lineTo(this.x-12.5, this.y+25);
-		ctx.lineTo(this.x+15, this.y-2.5);
-		ctx.lineTo(this.x+2.5, this.y-15);
-		ctx.fillStyle = "blue";
-		ctx.fill();
-
-		ctx.beginPath();
-		ctx.lineWidth = 1;
-		ctx.moveTo(this.x+15, this.y-2.5)
-		ctx.bezierCurveTo(this.x+25, this.y-12.5, this.x+12.5, this.y-25, this.x+2.5, this.y-15);
-		ctx.strokeStyle = "black";
-		ctx.stroke();
-	},
-	update: objectUpdate
-}
-
-var object7 = { // unknown planet
-	x:Math.random() * 950 + 25,
-	y:Math.random() * 590 + 25,
-	xspeed: Math.random() * 2 * speedMultiplier - speedMultiplier,
-	yspeed: Math.random() * 2 * speedMultiplier - speedMultiplier,
-	draw: function(ctx){
-		var anothergrd = ctx.createRadialGradient(this.x, this.y, 1, this.x, this.y, 30);
-		anothergrd.addColorStop(0,"red");
-		anothergrd.addColorStop(1,"white");
-		ctx.beginPath();
-		ctx.arc(this.x, this.y, 25, 0, Math.PI*2, true);
-		ctx.lineWidth = 3;
-		ctx.strokeStyle = "black";
-		ctx.stroke();
-		ctx.fillStyle = anothergrd;
-		ctx.fill();
-
-
-		ctx.beginPath();
-		ctx.lineJoin = "round";
-		ctx.lineWidth = 3;
-		ctx.moveTo(this.x-20, this.y+15);
-		ctx.lineTo(this.x-25, this.y+25);
-		ctx.lineTo(this.x-15, this.y+20);
-		ctx.strokeStyle = "black";
-		ctx.stroke();
-
-		ctx.beginPath();
-		ctx.lineJoin = "round";
-		ctx.lineWidth = 3;
-		ctx.moveTo(this.x+15, this.y-20);
-		ctx.lineTo(this.x+25, this.y-25);
-		ctx.lineTo(this.x+20, this.y-15);
-		ctx.strokeStyle = "black";
-		ctx.stroke();
-
-		ctx.beginPath();
-		ctx.moveTo(this.x-15, this.y+20);
-		ctx.lineTo(this.x+20, this.y-15);
-		ctx.lineWidth = 3;
-		ctx.strokeStyle = "black";
-		ctx.stroke();
-	},
-	update: objectUpdate
-}
-
-var object8 = { //space garbage
-	x:Math.random() * 950 + 25,
-	y:Math.random() * 590 + 25,
-	xspeed: Math.random() * 2 * speedMultiplier - speedMultiplier,
-	yspeed: Math.random() * 2 * speedMultiplier - speedMultiplier,
-	draw: function(ctx){
-		ctx.beginPath();
-		ctx.arc(this.x, this.y, 25, 0, Math.PI*2, true);
-		ctx.lineWidth = 1;
-		ctx.strokeStyle = "black";
-		ctx.stroke();
-
-		ctx.beginPath();
-		ctx.moveTo(this.x-20, this.y-5);
-		ctx.lineTo(this.x-20, this.y+5);
-		ctx.lineTo(this.x+20, this.y+5);
-		ctx.lineTo(this.x+20, this.y-5);
-		ctx.fillStyle = "red";
-		ctx.fill();
-
-		ctx.beginPath();
-		ctx.moveTo(this.x-5, this.y-20);
-		ctx.lineTo(this.x+5, this.y-20);
-		ctx.lineTo(this.x+5, this.y+20);
-		ctx.lineTo(this.x-5, this.y+20);
-		ctx.fillStyle = "red";
-		ctx.fill();
-
-		ctx.beginPath();
-		ctx.arc(this.x, this.y, 6, 0, Math.PI*2, true);
-		ctx.fillStyle = "black";
-		ctx.fill();
-	},
-	update: objectUpdate
-}
-
-var object9 = {  //a really colorful planet
-	x:Math.random() * 950 + 25,
-	y:Math.random() * 590 + 25,
-	xspeed: Math.random() * 2 * speedMultiplier - speedMultiplier,
-	yspeed: Math.random() * 2 * speedMultiplier - speedMultiplier,
-	draw: function(ctx){
-		var grd=ctx.createLinearGradient(this.x-25, this.y-25, this.x+25, this.y+25);
-		grd.addColorStop(0,"black");
-		grd.addColorStop("0.2","#cc3300");
-		grd.addColorStop("0.4","#0033cc");
-		grd.addColorStop("0.6","#009933");
-		grd.addColorStop("0.8","#ff0066");
-		grd.addColorStop(1,"#ccccff");
-
-		ctx.beginPath();
-		ctx.arc(this.x, this.y, 25, 0, Math.PI*2, true);
-		ctx.lineWidth = 2;
-		ctx.strokeStyle = "black";
-		ctx.stroke();
-		ctx.fillStyle = grd;
-		ctx.fill();
-	},
-	update: objectUpdate
-}
-
-var object10 = { //a star surrounded by four little stars 
-	x:Math.random() * 950 + 25,
-	y:Math.random() * 590 + 25,
-	xspeed: Math.random() * 2 * speedMultiplier - speedMultiplier,
-	yspeed: Math.random() * 2 * speedMultiplier - speedMultiplier,
-	draw: function(ctx){
-		ctx.beginPath();
-		ctx.moveTo(this.x, this.y-25);
-		ctx.lineTo(this.x-10, this.y-10);
-		ctx.lineTo(this.x-25, this.y);
-		ctx.lineTo(this.x-10, this.y+10);
-		ctx.lineTo(this.x, this.y+25);  //fifth point
-		ctx.lineTo(this.x+10, this.y+10);
-		ctx.lineTo(this.x+25, this.y);
-		ctx.lineTo(this.x+10, this.y-10);
-		ctx.lineTo(this.x, this.y-25);
-
-		ctx.stroke();
-		ctx.fillStyle = "yellow";
-		ctx.fill();
-
-		ctx.beginPath();
-		ctx.moveTo(this.x-17.5, this.y-25);
-		ctx.lineTo(this.x-20, this.y-20);
-		ctx.lineTo(this.x-25, this.y-17.5);
-		ctx.lineTo(this.x-20, this.y-15);
-		ctx.lineTo(this.x-17.5, this.y-10);
-		ctx.lineTo(this.x-15, this.y-15);
-		ctx.lineTo(this.x-10, this.y-17.5);
-		ctx.lineTo(this.x-15, this.y-20);
-		ctx.lineTo(this.x-17.5, this.y-25);
-		ctx.stroke();
-		ctx.fillStyle = "yellow";
-		ctx.fill();
-
-		ctx.beginPath();  //the second mini star
-		ctx.moveTo(this.x+17.5, this.y-25);
-		ctx.lineTo(this.x+20, this.y-20);
-		ctx.lineTo(this.x+25, this.y-17.5);
-		ctx.lineTo(this.x+20, this.y-15);
-		ctx.lineTo(this.x+17.5, this.y-10);
-		ctx.lineTo(this.x+15, this.y-15);
-		ctx.lineTo(this.x+10, this.y-17.5);
-		ctx.lineTo(this.x+15, this.y-20);
-		ctx.lineTo(this.x+17.5, this.y-25);
-		ctx.stroke();
-		ctx.fillStyle = "yellow";
-		ctx.fill();
-
-		ctx.beginPath();  //the third mini star
-		ctx.moveTo(this.x+17.5, this.y+25);
-		ctx.lineTo(this.x+20, this.y+20);
-		ctx.lineTo(this.x+25, this.y+17.5);
-		ctx.lineTo(this.x+20, this.y+15);
-		ctx.lineTo(this.x+17.5, this.y+10);
-		ctx.lineTo(this.x+15, this.y+15);
-		ctx.lineTo(this.x+10, this.y+17.5);
-		ctx.lineTo(this.x+15, this.y+20);
-		ctx.lineTo(this.x+17.5, this.y+25);
-		ctx.stroke();
-		ctx.fillStyle = "yellow";
-		ctx.fill();
-
-		ctx.beginPath();  //the forth mini star
-		ctx.moveTo(this.x-17.5, this.y+25);
-		ctx.lineTo(this.x-20, this.y+20);
-		ctx.lineTo(this.x-25, this.y+17.5);
-		ctx.lineTo(this.x-20, this.y+15);
-		ctx.lineTo(this.x-17.5, this.y+10);
-		ctx.lineTo(this.x-15, this.y+15);
-		ctx.lineTo(this.x-10, this.y+17.5);
-		ctx.lineTo(this.x-15, this.y+20);
-		ctx.lineTo(this.x-17.5, this.y+25);
-		ctx.stroke();
-		ctx.fillStyle = "yellow";
-		ctx.fill();
-	},
-	update: objectUpdate
+	this.xspeed = Math.random() * 2 * speedMultiplier - speedMultiplier;
+	this.yspeed = Math.random() * 2 * speedMultiplier - speedMultiplier;
+	this.update = objectUpdate;
 }
 
 // uniform update function for all 10 objects
-// xspeed decides the x-direction of the moving
-// yspeed decides the y coordinate depends on the current x coordinate
 function objectUpdate(){
-	if (this.x > 1000 || this.x < 0) {
-		this.xspeed = -this.xspeed;
-	}
-	if (this.y > 640 || this.y < 0) {
-		this.yspeed = -this.yspeed;
-	}
+		if (this.x > 1000 || this.x < 0) {
+			this.xspeed = -this.xspeed;
+		}
+		if (this.y > 640 || this.y < 0) {
+			this.yspeed = -this.yspeed;
+		}
 
-	this.x += this.xspeed;
-	this.y += this.yspeed;
+			this.x += this.xspeed;
+			this.y += this.yspeed;
 
 	this.draw(window.ctx);
 }
 
 //array of 10 objects
-var spaceObjects = [object1,object2,object3,object4,object5,object6,object7,object8,object9,object10];
+var spaceObjects = new Array();
 
 $(document).ready(function() {
 	if (typeof(Storage) !== "undefined") {
@@ -574,6 +152,7 @@ function switchScene() {
 			canvasLeft = canvasRect.left;
 			
 			// draw the game objects
+			createSpaceObjects();
 			drawSpaceObjectsWithoutUpdate();
 			blackHoleMethod = setInterval(createBlackHole, 2000/level);
 			drawGameMethod = setInterval(drawGame, 33);
@@ -674,6 +253,367 @@ function createBlackHole() {
 	blackHoles.push(newBlackHole);
 }
 
+function createSpaceObjects() {
+	// moom
+	spaceObjects.push(new SpaceObject(Math.random() * 950 + 25, Math.random() * 590 + 25, function(ctx){
+		ctx.beginPath();
+		ctx.arc(this.x, this.y, 25, 0, 2*Math.PI, true);
+		ctx.strokeStyle = "white";
+		ctx.stroke();
+		ctx.fillStyle = "yellow";
+		ctx.fill();
+
+		ctx.beginPath();
+		ctx.arc(this.x+15, this.y, 20, 0, 2*Math.PI, true);
+		ctx.strokeStyle = "#7BADFF";
+		ctx.stroke();
+		ctx.fillStyle = "#7BADFF";
+		ctx.fill();
+	}));
+	// rocket
+	spaceObjects.push(new SpaceObject(Math.random() * 950 + 25, Math.random() * 590 + 25, function(ctx){
+		ctx.beginPath();
+		ctx.moveTo(this.x, this.y);
+		ctx.quadraticCurveTo(this.x+25, this.y, this.x, this.y-40);
+		ctx.stroke();
+		ctx.fillStyle = "blue";
+		ctx.fill();
+
+		ctx.beginPath();
+		ctx.moveTo(this.x,this.y);
+		ctx.quadraticCurveTo(this.x-25, this.y, this.x, this.y-40);
+		ctx.stroke;
+		ctx.fillStyle = "blue";
+		ctx.fill();
+
+		ctx.beginPath();
+		ctx.moveTo(this.x-12.5, this.y-3);
+		ctx.lineTo(this.x+12.5, this.y-3);
+		ctx.lineTo(this.x+25, this.y+5);
+		ctx.lineTo(this.x-25, this.y+5);
+		ctx.stroke();
+		ctx.fillStyle = "red";
+		ctx.fill();
+		ctx.beginPath();
+		ctx.moveTo(this.x-12.5, this.y+5);
+		ctx.lineTo(this.x-6.25, this.y+10);
+		ctx.lineTo(this.x, this.y+5);
+		ctx.stroke();
+		ctx.fillStyle = "grey";
+		ctx.fill();
+		ctx.beginPath();
+		ctx.moveTo(this.x+12.5, this.y+5);
+		ctx.lineTo(this.x+6.25, this.y+10);
+		ctx.lineTo(this.x, this.y+5);
+		ctx.stroke();
+		ctx.fillStyle = "grey";
+		ctx.fill();
+	}));
+	// UFO
+	spaceObjects.push(new SpaceObject(Math.random() * 950 + 25, Math.random() * 590 + 25, function(ctx){
+		ctx.beginPath();
+		ctx.moveTo(this.x, this.y);
+		ctx.bezierCurveTo(this.x, this.y-40, this.x+50, this.y-40, this.x+50, this.y);
+		ctx.strokeStyle = "black";
+		ctx.stroke();
+		ctx.fillStyle = "grey";
+		ctx.fill();
+		ctx.beginPath();
+		ctx.moveTo(this.x, this.y);
+		ctx.lineTo(this.x+50, this.y);
+		ctx.stroke();
+		ctx.beginPath();
+		ctx.arc(this.x+6.25, this.y+5, 5, 0, Math.PI *2, true);
+		ctx.fillStyle = "purple";
+		ctx.fill();
+		ctx.arc(this.x+25, this.y+5, 5, 0, Math.PI*2, true);
+		ctx.fillStyle = "purple";
+		ctx.fill();
+		ctx.beginPath();
+		ctx.arc(this.x+43.75, this.y+5, 5, 0, Math.PI*2, true);
+		ctx.fillStyle = "purple";
+		ctx.fill();
+	}));
+	// astronaut
+	spaceObjects.push(new SpaceObject(Math.random() * 950 + 25, Math.random() * 590 + 25, function(ctx){
+		ctx.beginPath();
+		ctx.moveTo(this.x, this.y);
+		ctx.arc(this.x, this.y, 17.5, 0, Math.PI*2, true);
+		ctx.fillStyle = "#ffe6e6";
+		ctx.fill();
+
+		ctx.beginPath();
+		ctx.moveTo(this.x-20, this.y+17.5);
+		ctx.lineTo(this.x+20, this.y+17.5);
+		ctx.lineTo(this.x+20, this.y+27.5);
+		ctx.lineTo(this.x-20, this.y+27.5);
+		ctx.lineTo(this.x-20, this.y+17.5);
+		ctx.stroke();
+		ctx.fillStyle = "orange";
+		ctx.fill();
+		ctx.beginPath();
+		ctx.arc(this.x-12.5, this.y+30, 2.5, 0, Math.PI*2, true);
+		ctx.fillStyle = "green";
+		ctx.fill();
+		ctx.beginPath();
+		ctx.arc(this.x+12.5, this.y+30, 2.5, 0, Math.PI*2, true);
+		ctx.fillStyle = "green";
+		ctx.fill();
+
+		ctx.beginPath();
+		ctx.arc(this.x-10, this.y-7.5, 2.5, 0, Math.PI*2, true);
+		ctx.fillStyle = "black";
+		ctx.fill();
+		ctx.beginPath();
+		ctx.arc(this.x+10, this.y-7.5, 2.5, 0, Math.PI*2, true);
+		ctx.fillStyle = "black";
+		ctx.fill();
+
+		ctx.beginPath();
+		ctx.moveTo(this.x+10, this.y+5);
+		ctx.bezierCurveTo(this.x+10, this.y+12.5, this.x-10, this.y+12.5, this.x-10, this.y+5);
+		ctx.fillStyle = "red";
+		ctx.fill();
+
+		ctx.beginPath();
+		ctx.arc(this.x-22.5, this.y+22.5, 2.5, 0, Math.PI*2, true);
+		ctx.fillStyle = "green";
+		ctx.fill();
+
+		ctx.beginPath();
+		ctx.arc(this.x+22.5, this.y+22.5, 2.5, 0, Math.PI*2, true);
+		ctx.fillStyle = "green";
+		ctx.fill();
+
+		ctx.beginPath();
+		ctx.arc(this.x-21.25, this.y, 3.75, 0, Math.PI*2, true);
+		ctx.fillStyle = "green";
+		ctx.fill();
+
+		ctx.beginPath();
+		ctx.arc(this.x+21.25, this.y, 3.75, 0, Math.PI*2, true);
+		ctx.fillStyle = "green";
+		ctx.fill();
+	}));
+	// saturn
+	spaceObjects.push(new SpaceObject(Math.random() * 950 + 25, Math.random() * 590 + 25, function(ctx){
+		ctx.beginPath();
+		ctx.arc(this.x, this.y, 25, 0, Math.PI*2, true);
+		ctx.fillStyle = "#996600";
+		ctx.fill();
+
+		ctx.beginPath();
+		ctx.lineJoin = "round";
+		ctx.lineWidth = 5;
+		ctx.moveTo(this.x-20, this.y+15);
+		ctx.lineTo(this.x-25, this.y+25);
+		ctx.lineTo(this.x-15, this.y+20);
+		ctx.strokeStyle = "black";
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.lineJoin = "round";
+		ctx.lineWidth = 5;
+		ctx.moveTo(this.x+15, this.y-20);
+		ctx.lineTo(this.x+25, this.y-25);
+		ctx.lineTo(this.x+20, this.y-15);
+		ctx.strokeStyle = "black";
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.moveTo(this.x-15, this.y+20);
+		ctx.lineTo(this.x+20, this.y-15);
+		ctx.lineWidth = 5;
+		ctx.strokeStyle = "black";
+		ctx.stroke();
+	}));
+	// surveillance aircraft
+	spaceObjects.push(new SpaceObject(Math.random() * 950 + 25, Math.random() * 590 + 25, function(ctx){
+		ctx.beginPath();
+		ctx.moveTo(this.x-25, this.y-20);
+		ctx.lineTo(this.x-20, this.y-25);
+		ctx.lineTo(this.x+25, this.y+20);
+		ctx.lineTo(this.x+20, this.y+25);	
+		ctx.stroke();
+		ctx.fillStyle = "black";
+		ctx.fill();
+
+		ctx.beginPath();
+		ctx.moveTo(this.x-25, this.y+12.5);
+		ctx.lineTo(this.x-12.5, this.y+25);
+		ctx.lineTo(this.x+15, this.y-2.5);
+		ctx.lineTo(this.x+2.5, this.y-15);
+		ctx.fillStyle = "blue";
+		ctx.fill();
+
+		ctx.beginPath();
+		ctx.lineWidth = 1;
+		ctx.moveTo(this.x+15, this.y-2.5)
+		ctx.bezierCurveTo(this.x+25, this.y-12.5, this.x+12.5, this.y-25, this.x+2.5, this.y-15);
+		ctx.strokeStyle = "black";
+		ctx.stroke();
+	}));
+	// unknown planet
+	spaceObjects.push(new SpaceObject(Math.random() * 950 + 25, Math.random() * 590 + 25, function(ctx){
+		var anothergrd = ctx.createRadialGradient(this.x, this.y, 1, this.x, this.y, 30);
+		anothergrd.addColorStop(0,"red");
+		anothergrd.addColorStop(1,"white");
+		ctx.beginPath();
+		ctx.arc(this.x, this.y, 25, 0, Math.PI*2, true);
+		ctx.lineWidth = 3;
+		ctx.strokeStyle = "black";
+		ctx.stroke();
+		ctx.fillStyle = anothergrd;
+		ctx.fill();
+
+
+		ctx.beginPath();
+		ctx.lineJoin = "round";
+		ctx.lineWidth = 3;
+		ctx.moveTo(this.x-20, this.y+15);
+		ctx.lineTo(this.x-25, this.y+25);
+		ctx.lineTo(this.x-15, this.y+20);
+		ctx.strokeStyle = "black";
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.lineJoin = "round";
+		ctx.lineWidth = 3;
+		ctx.moveTo(this.x+15, this.y-20);
+		ctx.lineTo(this.x+25, this.y-25);
+		ctx.lineTo(this.x+20, this.y-15);
+		ctx.strokeStyle = "black";
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.moveTo(this.x-15, this.y+20);
+		ctx.lineTo(this.x+20, this.y-15);
+		ctx.lineWidth = 3;
+		ctx.strokeStyle = "black";
+		ctx.stroke();
+	}));
+	// space garbage
+	spaceObjects.push(new SpaceObject(Math.random() * 950 + 25, Math.random() * 590 + 25, function(ctx){
+		ctx.beginPath();
+		ctx.arc(this.x, this.y, 25, 0, Math.PI*2, true);
+		ctx.lineWidth = 1;
+		ctx.strokeStyle = "black";
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.moveTo(this.x-20, this.y-5);
+		ctx.lineTo(this.x-20, this.y+5);
+		ctx.lineTo(this.x+20, this.y+5);
+		ctx.lineTo(this.x+20, this.y-5);
+		ctx.fillStyle = "red";
+		ctx.fill();
+
+		ctx.beginPath();
+		ctx.moveTo(this.x-5, this.y-20);
+		ctx.lineTo(this.x+5, this.y-20);
+		ctx.lineTo(this.x+5, this.y+20);
+		ctx.lineTo(this.x-5, this.y+20);
+		ctx.fillStyle = "red";
+		ctx.fill();
+
+		ctx.beginPath();
+		ctx.arc(this.x, this.y, 6, 0, Math.PI*2, true);
+		ctx.fillStyle = "black";
+		ctx.fill();
+	}));
+	// a really colorful planet
+	spaceObjects.push(new SpaceObject(Math.random() * 950 + 25, Math.random() * 590 + 25, function(ctx){
+		var grd=ctx.createLinearGradient(this.x-25, this.y-25, this.x+25, this.y+25);
+		grd.addColorStop(0,"black");
+		grd.addColorStop("0.2","#cc3300");
+		grd.addColorStop("0.4","#0033cc");
+		grd.addColorStop("0.6","#009933");
+		grd.addColorStop("0.8","#ff0066");
+		grd.addColorStop(1,"#ccccff");
+
+		ctx.beginPath();
+		ctx.arc(this.x, this.y, 25, 0, Math.PI*2, true);
+		ctx.lineWidth = 2;
+		ctx.strokeStyle = "black";
+		ctx.stroke();
+		ctx.fillStyle = grd;
+		ctx.fill();
+	}));
+	// a star surrounded by four little stars 
+	spaceObjects.push(new SpaceObject(Math.random() * 950 + 25, Math.random() * 590 + 25, function(ctx){
+		ctx.beginPath();
+		ctx.moveTo(this.x, this.y-25);
+		ctx.lineTo(this.x-10, this.y-10);
+		ctx.lineTo(this.x-25, this.y);
+		ctx.lineTo(this.x-10, this.y+10);
+		ctx.lineTo(this.x, this.y+25);  //fifth point
+		ctx.lineTo(this.x+10, this.y+10);
+		ctx.lineTo(this.x+25, this.y);
+		ctx.lineTo(this.x+10, this.y-10);
+		ctx.lineTo(this.x, this.y-25);
+
+		ctx.stroke();
+		ctx.fillStyle = "yellow";
+		ctx.fill();
+
+		ctx.beginPath();
+		ctx.moveTo(this.x-17.5, this.y-25);
+		ctx.lineTo(this.x-20, this.y-20);
+		ctx.lineTo(this.x-25, this.y-17.5);
+		ctx.lineTo(this.x-20, this.y-15);
+		ctx.lineTo(this.x-17.5, this.y-10);
+		ctx.lineTo(this.x-15, this.y-15);
+		ctx.lineTo(this.x-10, this.y-17.5);
+		ctx.lineTo(this.x-15, this.y-20);
+		ctx.lineTo(this.x-17.5, this.y-25);
+		ctx.stroke();
+		ctx.fillStyle = "yellow";
+		ctx.fill();
+
+		ctx.beginPath();  //the second mini star
+		ctx.moveTo(this.x+17.5, this.y-25);
+		ctx.lineTo(this.x+20, this.y-20);
+		ctx.lineTo(this.x+25, this.y-17.5);
+		ctx.lineTo(this.x+20, this.y-15);
+		ctx.lineTo(this.x+17.5, this.y-10);
+		ctx.lineTo(this.x+15, this.y-15);
+		ctx.lineTo(this.x+10, this.y-17.5);
+		ctx.lineTo(this.x+15, this.y-20);
+		ctx.lineTo(this.x+17.5, this.y-25);
+		ctx.stroke();
+		ctx.fillStyle = "yellow";
+		ctx.fill();
+
+		ctx.beginPath();  //the third mini star
+		ctx.moveTo(this.x+17.5, this.y+25);
+		ctx.lineTo(this.x+20, this.y+20);
+		ctx.lineTo(this.x+25, this.y+17.5);
+		ctx.lineTo(this.x+20, this.y+15);
+		ctx.lineTo(this.x+17.5, this.y+10);
+		ctx.lineTo(this.x+15, this.y+15);
+		ctx.lineTo(this.x+10, this.y+17.5);
+		ctx.lineTo(this.x+15, this.y+20);
+		ctx.lineTo(this.x+17.5, this.y+25);
+		ctx.stroke();
+		ctx.fillStyle = "yellow";
+		ctx.fill();
+
+		ctx.beginPath();  //the forth mini star
+		ctx.moveTo(this.x-17.5, this.y+25);
+		ctx.lineTo(this.x-20, this.y+20);
+		ctx.lineTo(this.x-25, this.y+17.5);
+		ctx.lineTo(this.x-20, this.y+15);
+		ctx.lineTo(this.x-17.5, this.y+10);
+		ctx.lineTo(this.x-15, this.y+15);
+		ctx.lineTo(this.x-10, this.y+17.5);
+		ctx.lineTo(this.x-15, this.y+20);
+		ctx.lineTo(this.x-17.5, this.y+25);
+		ctx.stroke();
+		ctx.fillStyle = "yellow";
+		ctx.fill();
+	}));
+}
+
 function onCanvasClicked(event) {
 	console.log("canvas click");
 	var xOnCanvas = event.pageX - canvasLeft;
@@ -694,6 +634,7 @@ function onCanvasClicked(event) {
 			&& yOnCanvas > bh.y-25 && yOnCanvas < bh.y+75) {
 				console.log('click on a bh!');
 				currentScore += bh.point;
+				// update current score on the screen
 				$('#score').html('Score: '+currentScore);
 				blackHoles.splice(i, 1);
 				break;
