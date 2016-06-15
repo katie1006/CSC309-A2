@@ -24,27 +24,40 @@ var BlackHole = function(type, x, y, img) {
 	this.y = y;
 	this.img = img;
 	if (type == type_blue_hole) {
-		this.pullDuration = 8; // how long does it take to pull the object
+		this.pullDuration = 80; // how long does it take to pull the object
 		this.full = 3;
 		this.point = 5;
 	} else if (type == type_purple_hole) { 
-		this.pullDuration = 4;
+		this.pullDuration = 40;
 		this.full = 2;
 		this.point = 10;
 	} else if (type == type_black_hole) { 
-		this.pullDuration = 2;
+		this.pullDuration = 20;
 		this.full = 1;
 		this.point = 20;
 	} else {
 		// otherwise, hmm.... something must be wrong
 		console.log('Things went wrong! This kind of black hole does not exist!');
 	}
+	this.pulledSpaceObjects = new Array();
 }
 BlackHole.prototype.draw = function() {
 	// the top left corner of the image is at (x,y)
 	window.ctx.drawImage(this.img, this.x, this.y, 50, 50);
 	// debug purpose
 	window.ctx.strokeRect(this.x-25,this.y-25,100,100);
+}
+BlackHole.prototype.dismiss = function() {
+	// first remove this black hole from black hole list
+	blackHoles.splice(blackHoles.indexOf(this), 1);
+	// then tell all the objects being pulled to return
+	console.log('there are '+this.pulledSpaceObjects.length+' objects');
+	for (var i=0; i<this.pulledSpaceObjects.length; i++) {
+		console.log(this.pulledSpaceObjects[i]);
+		this.pulledSpaceObjects[i].blackHole = null;
+		this.pulledSpaceObjects[i].toBlackHoleSpeedX = -9999;
+		this.pulledSpaceObjects[i].toBlackHoleSpeedY = -9999;
+	}
 }
 var blackHoleMethod;
 
@@ -85,18 +98,29 @@ var SpaceObject = function(x,y,draw) {
 	this.yspeed = Math.random() * 2 * speedMultiplier - speedMultiplier;
 	this.toBlackHoleSpeedX = -9999;
 	this.toBlackHoleSpeedY = -9999;
-	this.blackHoleX = -9999;
-	this.blackHoleY = -9999;
+	this.blackHole = null;
 	this.update = objectUpdate;
 }
 
 // uniform update function for all 10 objects
 function objectUpdate(){
-	if (this.toBlackHoleSpeedX != -9999) {
+	if (this.blackHole != null) {
 		// check if it reaches the center
+		if (Math.abs(this.x - this.blackHole.x - 25) < 5) {
+			// now its at the center, this object will be eaten (at the end)
+			currentScore -= 50;
+			this.blackHole.full--;
+			if (this.blackHole.full <= 0) {
+				// black hole is full, it will disappear and all the space object will resume to their regular route
+				this.blackHole.dismiss();
+			}
 
-		this.x += this.toBlackHoleSpeedX;
-		this.y += this.toBlackHoleSpeedY;
+			// remove this object from the list
+			spaceObjects.splice(spaceObjects.indexOf(this), 1);
+		} else {
+			this.x += this.toBlackHoleSpeedX;
+			this.y += this.toBlackHoleSpeedY;
+		}
 	} else {
 		// check if reach the wall
 		if (this.x > 1000 || this.x < 0) {
@@ -115,6 +139,9 @@ function objectUpdate(){
 				// yes! moving toward the lovely black hole!
 				this.toBlackHoleSpeedX = (blackHoles[i].x + 25 - this.x) / blackHoles[i].pullDuration;
 				this.toBlackHoleSpeedY = (blackHoles[i].y + 25 - this.y) / blackHoles[i].pullDuration;
+				// for update purpose
+				this.blackHole = blackHoles[i];
+				blackHoles[i].pulledSpaceObjects.push(this);
 			}
 		}
 
@@ -694,7 +721,7 @@ function onCanvasClicked(event) {
 				currentScore += bh.point;
 				// update current score on the screen
 				$('#score').html('Score: '+currentScore);
-				blackHoles.splice(i, 1);
+				blackHoles[i].dismiss();
 				break;
 			}
 	}
