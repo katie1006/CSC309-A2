@@ -633,8 +633,31 @@ function drawGame() {
 function createBlackHole() {
 	var rand = Math.random();
 	var img = new Image();
-	var x = Math.random()*950;
-	var y = Math.random()*590;
+	var overlap = true;
+	var x;
+	var y;
+
+	// check if x and y overlap with any existing black holes
+	while (overlap) {
+		overlap = false;
+		x = Math.random()*950;
+		y = Math.random()*590;
+
+		// Not overlapping if the left edge is on the right of the right edge,
+		// the right edge is on the left of the left edge,
+		// the top edge is below the bottom edge,
+		// and the bottom edge is above the top edge.
+		for (var i=0; i<blackHoles.length; i++) {
+			if (!(x-25 > blackHoles[i].x+75
+				|| x+75 < blackHoles[i].x-25
+				|| y-25 > blackHoles[i].y+75
+				|| y+75 < blackHoles[i].y-25)) {
+				overlap = true;
+				console.log('overlap!!');
+				break;
+			}
+		}
+	}
 	
 	var newBlackHole;
 	if (rand > 0.5) { // blue, most frequent
