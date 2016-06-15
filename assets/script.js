@@ -40,12 +40,6 @@ var BlackHole = function(type, x, y, img) {
 		console.log('Things went wrong! This kind of black hole does not exist!');
 	}
 }
-BlackHole.prototype.onclick = function() {
-	console.log("I'm clicked!");
-	// dismiss this object
-	
-	// increase the score
-}
 BlackHole.prototype.draw = function() {
 	// the top left corner of the image is at (x,y)
 	window.ctx.drawImage(this.img, this.x, this.y, 50, 50);
@@ -558,11 +552,13 @@ function switchScene() {
 			// switched to level 1 summary page
 			$('#page_title').html('Level# 1');
 			$('#page_button').html('NEXT');
+			$('#level_score').html(currentScore);
 			
 		} else if (currentState == 4) {
 			// switched to level 2 summary page
 			$('#page_title').html('Level# 2');
 			$('#page_button').html('FINISH');
+			$('#level_score').html(currentScore);
 			
 		} else { // 1 or 3
 			// switched to game page
@@ -673,6 +669,9 @@ function onCanvasClicked(event) {
 		if (xOnCanvas > bh.x-25 && xOnCanvas < bh.x+75
 			&& yOnCanvas > bh.y-25 && yOnCanvas < bh.y+75) {
 				console.log('click on a bh!');
+				currentScore += bh.point;
+				$('#score').html('Score: '+currentScore);
+				blackHoles.splice(i, 1);
 				break;
 			}
 	}
