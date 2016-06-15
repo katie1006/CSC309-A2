@@ -547,6 +547,7 @@ function switchScene() {
 		currentState++;
 		clearInterval(blackHoleMethod);
 		clearInterval(drawGameMethod);
+		blackHoles.length = 0;
 		
 		if (currentState == 2) {
 			// switched to level 1 summary page
