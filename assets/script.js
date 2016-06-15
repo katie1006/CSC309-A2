@@ -150,9 +150,15 @@ function drawGame() {
 function createBlackHole() {
 	var rand = Math.random();
 	var img = new Image();
+	var x = Math.random()*950;
+	var y = Math.random()*590;
 	img.onload = function() {
-		window.ctx.drawImage(img, Math.random()*1000, Math.random()*640);
+		// the top left corner of the image is at (x,y)
+		window.ctx.drawImage(img, x, y, 50, 50);
+		// debug purpose
+		window.ctx.strokeRect(x-25,y-25,100,100);
 	}
+	
 	var newBlackHole;
 	if (rand > 0.5) { // blue, most frequent
 		img.src = path_blue_hole;
