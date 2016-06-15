@@ -48,11 +48,28 @@ BlackHole.prototype.draw = function() {
 }
 var blackHoleMethod;
 
+
 window.onload = function() {
 	console.log('onload');
 	var canvas = document.getElementById('view_port');
 	window.ctx = canvas.getContext("2d");
+
+	
+
+	// -----------------------declaring an localstorage ,which is an array of high scores here.
+	if (typeof(Storage) !== "undefined"){
+		if(! localStorage.twenty){
+			var twentyscores = []; //an array of scores
+			localStorage.setItem("twenty",twentyscores);
+		}
+	}else{
+		//alternative
+	}
+	//------------------------------------------------------------------------
+
+
 };
+
 
 var speedMultiplier = 5;
 //declaring and randomly initializing 10 objects
@@ -136,11 +153,7 @@ $(document).ready(function() {
 	});
 });
 
-// -----------------------declaring an localstorage ,which is an array of high scores here.
 
-var twentyscores = [];
-localStorage.setItem("twenty",twentyscores);
-//------------------------------------------------------------------------
 
 function switchScene() {
 	if (currentState == 4) { // finished game, restart
