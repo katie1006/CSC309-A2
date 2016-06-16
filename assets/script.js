@@ -200,11 +200,17 @@ function switchScene() {
 		// TODO: update scene back to the start page
 		$('#page_title').html('Solar Game');
 		$('#page_button').html('START');
+		// doing this manually to make sure level_score is showing and high_score is hiding
+		$('#level_score').addClass('hide').removeClass('show');
+		$('#high_score_holder').addClass('show').removeClass('hide');
+		// reset the content of this holder
+		$('#high_score_holder').html("<p>High Score:</p>");
 		// insert top scores
 
 		//sort the array of scores in descending orders 
 		// localStorage.getItem("twenty").sort(function(a,b){return b - a});
 
+		populateTopScores();
 		
 		currentState = 0;
 	} else {
@@ -233,13 +239,17 @@ function switchScene() {
 			}
 
 			$('#page_title').html('Level# 1');
-			$('#level_score').html(currentScore);
+			// doing this manually to make sure level_score is showing and high_score is hiding
+			$('#level_score').addClass('show').removeClass('hide').html('Score:<br>'+currentScore);
+			$('#high_score_holder').addClass('hide').removeClass('show');
 			
 		} else if (currentState == 4) {
 			// switched to level 2 summary page
 			$('#page_title').html('Level# 2');
 			$('#page_button').html('FINISH');
-			$('#level_score').html(currentScore);
+			// doing this manually to make sure level_score is showing and high_score is hiding
+			$('#level_score').addClass('show').removeClass('hide').html('Score:<br>'+currentScore);
+			$('#high_score_holder').addClass('hide').removeClass('show');
 
 			//storing the score of this attempt
 			storeTopScore();
@@ -265,6 +275,29 @@ function switchScene() {
 	}
 }
 
+function populateTopScores() {
+	if (typeof(Storage) !== "undefined") {
+		// first check if it exist
+		if (!localStorage.topScores) { 
+			// does not exist, populate a 0 and add to high score
+			var $zero = $('<p/>', {
+				text: '0'
+			});
+			$zero.appendTo('#high_score_holder');
+		} else {
+			// exist! Fetch array first
+			var list = JSON.parse(localStorage.getItem('topScores'));
+			console.log(list);
+			for (var i=0; i<list.length; i++) {
+				var $score = $('<p/>', {
+					text: ''+list[i]
+				});
+				$score.appendTo('#high_score_holder');
+			}
+		}
+	}
+}
+
 function storeTopScore() {
 	if (typeof(Storage) !== "undefined") {
 		var topScoreList;
@@ -278,7 +311,7 @@ function storeTopScore() {
 		}
 		topScoreList.push(currentScore);
 		topScoreList.sort(function(a,b) {
-			return a-b;
+			return b-a;
 		});
 
 		// check if it is more than 20

@@ -4,7 +4,7 @@
 	text-align:center;
 }
 
-#transition_page > * {
+#transition_page > .show {
 	border: 1px dashed black;
 	display: inline-block;
 	margin: 10px 30%;
@@ -12,7 +12,7 @@
 	padding: 10px 40px;
 }
 
-#page_title {
+#page_title.show {
 	font-weight: bold;
 	font-size: 250%;
 	color: #EEFF00;
@@ -21,9 +21,13 @@
 	padding: 20px 80px;
 }
 
-#page_button {
+#page_button.show {
 	border-style: solid;
 	background-color: white;
+}
+
+#level_score {
+	font-size: 120%;
 }
 
 /* Game Page */

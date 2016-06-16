@@ -9,12 +9,13 @@
 	
 	<body>
 		<section id="transition_page" class='show'>
-			<p id="page_title">Solar Game</p>
-			<section id="score_holder">
+			<p id="page_title" class="show">Solar Game</p>
+			<p id='level_score' class="hide">Score:<br>0</p>
+			<section id="high_score_holder" class='show'>
 				<p>High Score:</p>
-				<p id="level_score">0</p>
+				<p>0</p>
 			</section>
-			<button id="page_button" onclick='switchScene()'>START</button>
+			<button id="page_button" class='show' onclick='switchScene()'>START</button>
 		</section>
 		
 		<section id="game_page" class='hide'>
