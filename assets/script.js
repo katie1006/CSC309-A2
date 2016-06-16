@@ -12,7 +12,6 @@ var drawGameMethod;
 var type_blue_hole = 0;
 var type_purple_hole = 1;
 var type_black_hole = 2;
-var pull_speed = 20;
 var path_blue_hole = "assets/images/blue_hole.svg";
 var path_purple_hole = "assets/images/purple_hole.svg";
 var path_black_hole = "assets/images/black_hole.svg";
@@ -51,9 +50,7 @@ BlackHole.prototype.dismiss = function() {
 	// first remove this black hole from black hole list
 	blackHoles.splice(blackHoles.indexOf(this), 1);
 	// then tell all the objects being pulled to return
-	console.log('there are '+this.pulledSpaceObjects.length+' objects');
 	for (var i=0; i<this.pulledSpaceObjects.length; i++) {
-		console.log(this.pulledSpaceObjects[i]);
 		this.pulledSpaceObjects[i].blackHole = null;
 		this.pulledSpaceObjects[i].toBlackHoleSpeedX = -9999;
 		this.pulledSpaceObjects[i].toBlackHoleSpeedY = -9999;
@@ -66,28 +63,10 @@ window.onload = function() {
 	console.log('onload');
 	var canvas = document.getElementById('view_port');
 	window.ctx = canvas.getContext("2d");
-
-	
-
-	// -----------------------declaring an localstorage ,which is an array of high scores here.
-	if (typeof(Storage) !== "undefined"){
-		if(! localStorage.twenty){
-			var twentyscores = []; //an array of scores
-			localStorage.setItem("twenty",twentyscores);
-		}
-	}else{
-		//alternative
-	}
-	//------------------------------------------------------------------------
-
-
 };
 
 
 var speedMultiplier = 5;
-//declaring and randomly initializing 10 objects
-//while animating,remember to update the coordicate of every objects(deletable)
-// Note: coordinate of these 10 objects are the center!
 
 var SpaceObject = function(x,y,draw) {
 	this.x = x;
@@ -167,16 +146,14 @@ function objectUpdate(){
 var spaceObjects = new Array();
 
 $(document).ready(function() {
-	if (typeof(Storage) !== "undefined") {
-		/* use this variable currentState to control what scene to show
-			0 -> start page
-			1 -> level 1 game page
-			2 -> level 1 finish page
-			3 -> level 2 game page
-			4 -> level 2 finish page
-		*/
-		currentState = 0;
-	}
+	/* use this variable currentState to control what scene to show
+		0 -> start page
+		1 -> level 1 game page
+		2 -> level 1 finish page
+		3 -> level 2 game page
+		4 -> level 2 finish page
+	*/
+	currentState = 0;
 	
 	$(window).resize(function() {
 		var rect = document.getElementById('view_port').getBoundingClientRect();
@@ -197,7 +174,6 @@ function switchScene() {
 	if (currentState == 4) { // finished game, restart
 		console.log('game finished');
 		
-		// TODO: update scene back to the start page
 		$('#page_title').html('Solar Game');
 		$('#page_button').html('START');
 		// doing this manually to make sure level_score is showing and high_score is hiding
@@ -206,10 +182,6 @@ function switchScene() {
 		// reset the content of this holder
 		$('#high_score_holder').html("<p>High Score:</p>");
 		// insert top scores
-
-		//sort the array of scores in descending orders 
-		// localStorage.getItem("twenty").sort(function(a,b){return b - a});
-
 		populateTopScores();
 		
 		currentState = 0;
