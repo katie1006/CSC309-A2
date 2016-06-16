@@ -109,6 +109,7 @@ function objectUpdate(){
 		if (Math.abs(this.x - this.blackHole.x - 25) < 5) {
 			// now its at the center, this object will be eaten (at the end)
 			currentScore -= 50;
+			$('#score').html('Score: '+currentScore);
 			this.blackHole.full--;
 			if (this.blackHole.full <= 0) {
 				// black hole is full, it will disappear and all the space object will resume to their regular route
@@ -188,6 +189,11 @@ $(document).ready(function() {
 
 
 function switchScene() {
+	// reset intervals
+	clearInterval(blackHoleMethod);
+	clearInterval(drawGameMethod);
+	clearInterval(timerMethod);
+
 	if (currentState == 4) { // finished game, restart
 		console.log('game finished');
 		
@@ -208,8 +214,10 @@ function switchScene() {
 		$('#transition_page').toggleClass('hide show');
 		$('#game_page').toggleClass('hide show');
 		currentState++;
-		clearInterval(blackHoleMethod);
-		clearInterval(drawGameMethod);
+
+		// reset values
+		blackHoleMethod = null;
+		drawGameMethod = null;
 		blackHoles.length = 0;
 		
 		if (currentState == 2) {
@@ -243,7 +251,7 @@ function switchScene() {
 			var level = (currentState+1)/2;
 			$('#level').html('Level# '+level);
 			$('#score').html('Score: '+currentScore);
-			timerMethod = setInterval(clock, 1000);
+			
 			
 			$('#view_port').click(onCanvasClicked);
 			var canvasRect = document.getElementById('view_port').getBoundingClientRect();
@@ -252,7 +260,7 @@ function switchScene() {
 			
 			// draw the game objects
 			createSpaceObjects();
-			drawSpaceObjectsWithoutUpdate();
+			timerMethod = setInterval(clock, 1000);
 			blackHoleMethod = setInterval(createBlackHole, 2000/level);
 			drawGameMethod = setInterval(drawGame, 33);
 		}
@@ -738,12 +746,5 @@ function onCanvasClicked(event) {
 				blackHoles[i].dismiss();
 				break;
 			}
-	}
-}
-
-function drawSpaceObjectsWithoutUpdate() {
-	window.ctx.beginPath();
-	for (var i=0; i<spaceObjects.length; i++) {
-		spaceObjects[i].draw(window.ctx);
 	}
 }
