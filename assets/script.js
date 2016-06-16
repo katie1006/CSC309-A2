@@ -117,6 +117,11 @@ function objectUpdate(){
 
 			// remove this object from the list
 			spaceObjects.splice(spaceObjects.indexOf(this), 1);
+
+			// if now the list is empty! Game Over!
+			if (spaceObjects.length <= 0) {
+				switchScene();
+			}
 		} else {
 			this.x += this.toBlackHoleSpeedX;
 			this.y += this.toBlackHoleSpeedY;
@@ -209,8 +214,17 @@ function switchScene() {
 		
 		if (currentState == 2) {
 			// switched to level 1 summary page
+			// However, if now there's no more space objects, game over
+			if (spaceObjects.length <= 0) {
+				$('#page_button').html('FINISH');
+				currentState = 4;
+
+				// store the score
+			} else {
+				$('#page_button').html('NEXT');
+			}
+
 			$('#page_title').html('Level# 1');
-			$('#page_button').html('NEXT');
 			$('#level_score').html(currentScore);
 			
 		} else if (currentState == 4) {
