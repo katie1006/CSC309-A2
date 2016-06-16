@@ -202,9 +202,8 @@ function switchScene() {
 		$('#page_button').html('START');
 		// insert top scores
 
-		//sort the array of scores in descending orders ----------------------------------------------
-		localStorage.getItem("twenty").sort(function(a,b){return b - a});
-		//----------------------------------------------------------------------
+		//sort the array of scores in descending orders 
+		// localStorage.getItem("twenty").sort(function(a,b){return b - a});
 
 		
 		currentState = 0;
@@ -228,6 +227,7 @@ function switchScene() {
 				currentState = 4;
 
 				// store the score
+				storeTopScore();
 			} else {
 				$('#page_button').html('NEXT');
 			}
@@ -241,10 +241,8 @@ function switchScene() {
 			$('#page_button').html('FINISH');
 			$('#level_score').html(currentScore);
 
-			//storing the score of this attempt  -------------------------------------------------
-			localStorage.getItem("twenty").push(currentScore);
-			//----------------------------------------------------------------------
-
+			//storing the score of this attempt
+			storeTopScore();
 			
 		} else { // 1 or 3
 			// switched to game page
@@ -264,6 +262,32 @@ function switchScene() {
 			blackHoleMethod = setInterval(createBlackHole, 2000/level);
 			drawGameMethod = setInterval(drawGame, 33);
 		}
+	}
+}
+
+function storeTopScore() {
+	if (typeof(Storage) !== "undefined") {
+		var topScoreList;
+		// first check if it exist
+		if (!localStorage.topScores) {
+			// does not exist, need to create new
+			topScoreList = new Array();
+		} else {
+			// exist, use JSON to parse to array
+			topScoreList = JSON.parse(localStorage.getItem('topScores'));
+		}
+		topScoreList.push(currentScore);
+		topScoreList.sort(function(a,b) {
+			return a-b;
+		});
+
+		// check if it is more than 20
+		if (topScoreList.length > 20) {
+			topScoreList = topScoreList.slice(0,20);
+		}
+
+		// store it back to local storage
+		localStorage.setItem('topScores', JSON.stringify(topScoreList));
 	}
 }
 
