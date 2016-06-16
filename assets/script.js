@@ -1,12 +1,15 @@
 // global variables
 var currentState = 0;
-var timerMethod;
 var timerCount = 60;
 var paused = false;
 var currentScore = 200;
 var canvasTop = -1;
 var canvasLeft = -1;
+var speedMultiplier = 3;
+
+var timerMethod;
 var drawGameMethod;
+var blackHoleMethod;
 
 // Black hole constants
 var type_blue_hole = 0;
@@ -23,11 +26,11 @@ var BlackHole = function(type, x, y, img) {
 	this.y = y;
 	this.img = img;
 	if (type == type_blue_hole) {
-		this.pullDuration = 80; // how long does it take to pull the object
+		this.pullDuration = 60; // how long does it take to pull the object
 		this.full = 3;
 		this.point = 5;
 	} else if (type == type_purple_hole) { 
-		this.pullDuration = 40;
+		this.pullDuration = 35;
 		this.full = 2;
 		this.point = 10;
 	} else if (type == type_black_hole) { 
@@ -44,7 +47,7 @@ BlackHole.prototype.draw = function() {
 	// the top left corner of the image is at (x,y)
 	window.ctx.drawImage(this.img, this.x, this.y, 50, 50);
 	// debug purpose
-	window.ctx.strokeRect(this.x-25,this.y-25,100,100);
+	// window.ctx.strokeRect(this.x-25,this.y-25,100,100);
 }
 BlackHole.prototype.dismiss = function() {
 	// first remove this black hole from black hole list
@@ -56,17 +59,6 @@ BlackHole.prototype.dismiss = function() {
 		this.pulledSpaceObjects[i].toBlackHoleSpeedY = -9999;
 	}
 }
-var blackHoleMethod;
-
-
-window.onload = function() {
-	console.log('onload');
-	var canvas = document.getElementById('view_port');
-	window.ctx = canvas.getContext("2d");
-};
-
-
-var speedMultiplier = 5;
 
 var SpaceObject = function(x,y,draw) {
 	this.x = x;
@@ -80,6 +72,8 @@ var SpaceObject = function(x,y,draw) {
 	this.blackHole = null;
 	this.update = objectUpdate;
 }
+//array of 10 objects
+var spaceObjects = new Array();
 
 // uniform update function for all 10 objects
 function objectUpdate(){
@@ -108,10 +102,10 @@ function objectUpdate(){
 		}
 	} else {
 		// check if reach the wall
-		if (this.x > 1000 || this.x < 0) {
+		if (this.x > 975 || this.x < 25) {
 			this.xspeed = -this.xspeed;
 		}
-		if (this.y > 640 || this.y < 0) {
+		if (this.y > 615 || this.y < 25) {
 			this.yspeed = -this.yspeed;
 		}
 
@@ -142,9 +136,6 @@ function objectUpdate(){
 	this.draw(window.ctx);
 }
 
-//array of 10 objects
-var spaceObjects = new Array();
-
 $(document).ready(function() {
 	/* use this variable currentState to control what scene to show
 		0 -> start page
@@ -163,7 +154,11 @@ $(document).ready(function() {
 	});
 });
 
-
+window.onload = function() {
+	console.log('onload');
+	var canvas = document.getElementById('view_port');
+	window.ctx = canvas.getContext("2d");
+};
 
 function switchScene() {
 	// reset intervals
@@ -390,6 +385,9 @@ function createBlackHole() {
 }
 
 function createSpaceObjects() {
+	// reset array
+	spaceObjects = new Array();
+
 	// moom
 	spaceObjects.push(new SpaceObject(Math.random() * 950 + 25, Math.random() * 590 + 25, function(ctx){
 		ctx.beginPath();
